@@ -10,12 +10,42 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id              String      @id @default(cuid())
-  name            String?
-  email           String?   @unique
-  image           String?
-  hashedPassword  String?
-  createdAt       DateTime @default(now())
-  updatedAt       DateTime @updatedAt
+// model User {
+//   id             String   @id @default(cuid())
+//   name           String?
+//   email          String?  @unique
+//   image          String?
+//   hashedPassword String?
+//   createdAt      DateTime @default(now())
+//   updatedAt      DateTime @updatedAt
+// }
+
+model Todo {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  status      Boolean  @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  category_id String
+  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  tags        Tag[]    @relation("TodosTags")
+}
+
+model Category {
+  id          String   @id @default(cuid())
+  Todos       Todo[]
+  title       String
+  description String?
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Tag {
+  id          String   @id @default(cuid())
+  title       String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  description String?
+  todos       Todo[]   @relation("TodosTags")
 }
