@@ -1,6 +1,6 @@
 import { NextResponse, NextRequest } from "next/server";
-import prismadb from "@/app/libs/prismadb";
-import { Category } from "@/app/types";
+import prismadb from "@/libs/prismadb";
+import { Category } from "@/types";
 
 export const GET = async () => {
   try {
