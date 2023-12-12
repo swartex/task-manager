@@ -1,6 +1,5 @@
 import { NextResponse, NextRequest } from "next/server";
 import prismadb from "@/libs/prismadb";
-import { Category } from "@/types";
 
 export const GET = async () => {
   try {
@@ -11,6 +10,7 @@ export const GET = async () => {
   }
 };
 
+// add new category route
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
@@ -30,17 +30,17 @@ export const POST = async (req: NextRequest) => {
 };
 
 export const DELETE = async (req: NextRequest) => {
-  const { category_id } = await req.json();
+  const { categoryId } = await req.json();
   try {
     const deletedCategory = await prismadb.category.delete({
       where: {
-        id: category_id,
+        id: categoryId,
       },
     });
 
     return NextResponse.json({
       success: true,
-      deletedCategoryId: category_id,
+      deletedCategoryId: categoryId,
     });
   } catch (e) {
     console.log(e);

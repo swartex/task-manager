@@ -1,6 +1,5 @@
 import { create } from 'zustand';
-
-export type ModalType = 'cteateCategory';
+import { type ModalType } from '@/types/modalTypes';
 
 interface ModalStore {
   type: ModalType | null;
