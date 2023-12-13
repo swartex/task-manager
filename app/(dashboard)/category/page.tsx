@@ -1,6 +1,5 @@
+import CategoryList from '@/components/CategoryList';
 import prisma from '@/libs/prismadb';
-import CategoryTable from './_components/CategoryTable';
-
 
 const Dashboard = async () => {
   const categories = await prisma.category.findMany({
@@ -9,11 +8,14 @@ const Dashboard = async () => {
         select: { Todos: true },
       },
     },
+    orderBy: [
+      {
+        createdAt: 'asc',
+      },
+    ],
   });
 
-  return (
-    <CategoryTable categories={categories} />
-  );
+  return <CategoryList categories={categories} />;
 };
 
 export default Dashboard;

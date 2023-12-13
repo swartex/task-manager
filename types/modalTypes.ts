@@ -1,1 +1,1 @@
-export type ModalType = 'cteateCategory';
+export type ModalType = 'createCategory' | 'createTodo' | 'updateCategory' | 'updateTodo';

@@ -1,22 +1,15 @@
 'use client';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useModal } from '@/hooks/useModal';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import Input from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-const CreateModal = () => {
+const CreateCategoryModal = () => {
   const router = useRouter();
-  const { isOpen, onClose } = useModal();
+  const { isOpen, onClose, type } = useModal();
   const [title, setTitle] = useState<string>('');
   const [description, setdescription] = useState<string>('');
 
@@ -43,8 +36,10 @@ const CreateModal = () => {
     router.refresh();
   };
 
+  const isModalOpen = isOpen && type === 'createCategory';
+
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
+    <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Create new category</DialogTitle>
@@ -77,4 +72,4 @@ const CreateModal = () => {
   );
 };
 
-export default CreateModal;
+export default CreateCategoryModal;

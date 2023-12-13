@@ -1,3 +1,4 @@
+import TodoList from '@/components/TodosList';
 import prisma from '@/libs/prismadb';
 
 const TodosPage = async () => {
@@ -5,14 +6,17 @@ const TodosPage = async () => {
     include: {
       category: true,
     },
+    orderBy: [
+      {
+        updatedAt: 'desc',
+      },
+    ],
   });
 
   return (
     <div>
       <ul>
-        {todos.map((todo) => {
-          return <li key={todo.id}>{todo.title}</li>;
-        })}
+        <TodoList todos={todos} />
       </ul>
     </div>
   );

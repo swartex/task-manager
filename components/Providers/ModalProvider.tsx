@@ -1,7 +1,9 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import CreateModal from '../Modals/CreateModal';
+import CreateCategoryModal from '../Modals/CreateCategoryModal';
+import CreateTodoModal from '../Modals/CreateTodoModal';
+import UpdateCategoryModal from '../Modals/UpdateCategoryModal';
 
 const ModalProvider = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -15,7 +17,9 @@ const ModalProvider = () => {
   }
   return (
     <>
-      <CreateModal />
+      <CreateCategoryModal />
+      <CreateTodoModal />
+      <UpdateCategoryModal />
     </>
   );
 };
