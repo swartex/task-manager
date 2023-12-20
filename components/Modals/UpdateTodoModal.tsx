@@ -20,9 +20,9 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Checkbox } from '@/components/ui/checkbox';
 import { getCategories } from '@/actions/getCategory';
 
-const CreateTodoModal = () => {
+const UpdateTodoModal = () => {
   const router = useRouter();
-  const { isOpen, onClose, type } = useModal();
+  const { isOpen, onClose, type, data } = useModal();
   const [title, setTitle] = useState<string>('');
   const [description, setdescription] = useState<string>('');
   const [status, setStatus] = useState<boolean>(false);
@@ -46,7 +46,8 @@ const CreateTodoModal = () => {
   };
 
   const handelAddCategory = async () => {
-    await axios.post('/api/v1/todo', {
+    await axios.patch('/api/v1/todo', {
+      id: data.todo!.id,
       title,
       description,
       status,
@@ -67,13 +68,23 @@ const CreateTodoModal = () => {
     })();
   }, []);
 
-  const isModalOpen = isOpen && type === 'createTodo';
+  useEffect(() => {
+    if (data.todo) {
+      setTitle(data.todo.title);
+      setStatus(data.todo.status);
+      setdescription(data.todo.description ?? '');
+      setSelectedCategory(data.todo.category_id);
+      console.log(data);
+    }
+  }, [data]);
+
+  const isModalOpen = isOpen && type === 'updateTodo';
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create todo</DialogTitle>
+          <DialogTitle>Update todo</DialogTitle>
           <div className="py-4">
             <Input
               value={title}
@@ -90,7 +101,10 @@ const CreateTodoModal = () => {
             />
             <div className="py-4">
               {categories && (
-                <Select onValueChange={(value) => setSelectedCategory(value)}>
+                <Select
+                  defaultValue={data.todo?.category_id}
+                  onValueChange={(value) => setSelectedCategory(value)}
+                >
                   <SelectTrigger>
                     <SelectValue placeholder="Select a category" />
                   </SelectTrigger>
@@ -110,7 +124,7 @@ const CreateTodoModal = () => {
               )}
             </div>
             <div className="flex items-center space-x-2 py-4">
-              <Checkbox id="status" onCheckedChange={handleChangeStatus} />
+              <Checkbox checked={status} id="status" onCheckedChange={handleChangeStatus} />
               <label
                 htmlFor="status"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -133,4 +147,4 @@ const CreateTodoModal = () => {
   );
 };
 
-export default CreateTodoModal;
+export default UpdateTodoModal;

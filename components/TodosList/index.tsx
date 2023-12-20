@@ -54,7 +54,16 @@ export default function TodoList({ todos }: TodoListProps) {
               </TableCell>
               <TableCell>{item.category.title}</TableCell>
               <TableCell className="fle-row flex gap-2">
-                <Button variant="outline">Update</Button>
+                <Button
+                  variant="outline"
+                  onClick={() =>
+                    onOpen('updateTodo', {
+                      todo: item,
+                    })
+                  }
+                >
+                  Update
+                </Button>
                 <Button variant="destructive">Delete</Button>
               </TableCell>
             </TableRow>
