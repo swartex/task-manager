@@ -17,7 +17,7 @@ import {
   SelectValue,
 } from '@/components/ui/select';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { Checkbox } from '@/components/ui/checkbox';
+import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
 
 const CreateTodoModal = () => {
@@ -110,7 +110,7 @@ const CreateTodoModal = () => {
               )}
             </div>
             <div className="flex items-center space-x-2 py-4">
-              <Checkbox id="status" onCheckedChange={handleChangeStatus} />
+              <Switch id="status" onCheckedChange={handleChangeStatus} />
               <label
                 htmlFor="status"
                 className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
