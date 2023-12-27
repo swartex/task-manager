@@ -62,23 +62,21 @@ const UpdateTodoModal = () => {
   };
 
   useEffect(() => {
-    (async () => {
-      const categories = await getCategories();
-      setCategories(categories);
-    })();
-  }, []);
-
-  useEffect(() => {
     if (data.todo) {
       setTitle(data.todo.title);
       setStatus(data.todo.status);
       setdescription(data.todo.description ?? '');
       setSelectedCategory(data.todo.category_id);
-      console.log(data);
     }
   }, [data]);
 
   const isModalOpen = isOpen && type === 'updateTodo';
+
+  useEffect(() => {
+    if (isModalOpen) {
+      getCategories().then((data) => setCategories(data));
+    }
+  }, [isModalOpen]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>

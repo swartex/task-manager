@@ -60,14 +60,13 @@ const CreateTodoModal = () => {
     setStatus(value);
   };
 
-  useEffect(() => {
-    (async () => {
-      const categories = await getCategories();
-      setCategories(categories);
-    })();
-  }, []);
-
   const isModalOpen = isOpen && type === 'createTodo';
+
+  useEffect(() => {
+    if (isModalOpen) {
+      getCategories().then((data) => setCategories(data));
+    }
+  }, [isModalOpen]);
 
   return (
     <Dialog open={isModalOpen} onOpenChange={onClose}>
