@@ -28,15 +28,12 @@ export default function CategoryList({ categories }: CategoryListProps) {
   const router = useRouter();
 
   const onDeleteCategory = async (id: string) => {
-    axios
-      .delete('/api/v1/category', {
-        data: {
-          id,
-        },
-      })
-      .then(() => {
-        router.refresh();
-      });
+    await axios.delete('/api/v1/category', {
+      data: {
+        id,
+      },
+    });
+    router.refresh();
   };
 
   return (

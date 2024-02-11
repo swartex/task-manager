@@ -50,3 +50,27 @@ export const PATCH = async (req: NextRequest) => {
     return new NextResponse('Internal Error', { status: 500 });
   }
 };
+
+interface IDeleteParams {
+  todoId: string;
+}
+
+export const DELETE = async (req: NextRequest) => {
+  const { todoId } = await req.json();
+
+  try {
+    await prismadb.todo.delete({
+      where: {
+        id: todoId,
+      },
+    });
+
+    return NextResponse.json({
+      success: true,
+      deletedCategoryId: todoId,
+    });
+  } catch (error) {
+    console.log(error);
+    return new NextResponse('Internal Error', { status: 500 });
+  }
+};

@@ -27,7 +27,7 @@ const CreateTodoModal = () => {
   const [description, setdescription] = useState<string>('');
   const [status, setStatus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>();
-  const [selectedCategory, setSelectedCategory] = useState<string>('');
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -119,7 +119,7 @@ const CreateTodoModal = () => {
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button variant="default" onClick={handelAddCategory}>
+            <Button disabled={!selectedCategory} variant="default" onClick={handelAddCategory}>
               Add new
             </Button>
             <Button variant="outline" onClick={handleClose}>

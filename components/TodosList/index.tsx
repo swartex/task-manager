@@ -11,8 +11,11 @@ import {
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/useModal';
+import { useToast } from '@/components/ui/use-toast';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
 import { Check, CheckCheck } from 'lucide-react';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 
 interface TodoListProps {
   todos: TodoWithCategory[];
@@ -20,7 +23,21 @@ interface TodoListProps {
 
 export default function TodoList({ todos }: TodoListProps) {
   const { onOpen } = useModal();
-  // console.log(todos);
+  const router = useRouter();
+  const { toast } = useToast();
+
+  const handleDeleteTodo = async (todoId: string) => {
+    await axios.delete('api/v1/todo', {
+      data: {
+        todoId,
+      },
+    });
+    router.refresh();
+    toast({
+      variant: 'success',
+      description: `Toto was been deleted`,
+    });
+  };
 
   return (
     <>
@@ -31,7 +48,7 @@ export default function TodoList({ todos }: TodoListProps) {
         <TableCaption>All todos</TableCaption>
         <TableHeader>
           <TableRow>
-            <TableHead className="w-[100px]">ID</TableHead>
+            <TableHead className="w-[100px]">№</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Description</TableHead>
             <TableHead>Status</TableHead>
@@ -64,7 +81,9 @@ export default function TodoList({ todos }: TodoListProps) {
                 >
                   Update
                 </Button>
-                <Button variant="destructive">Delete</Button>
+                <Button variant="destructive" onClick={() => handleDeleteTodo(item.id)}>
+                  Delete
+                </Button>
               </TableCell>
             </TableRow>
           ))}
