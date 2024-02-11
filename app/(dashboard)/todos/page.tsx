@@ -15,9 +15,7 @@ const TodosPage = async () => {
 
   return (
     <div>
-      <ul>
-        <TodoList todos={todos} />
-      </ul>
+      <TodoList todos={todos} />
     </div>
   );
 };

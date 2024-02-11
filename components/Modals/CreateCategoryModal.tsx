@@ -6,6 +6,7 @@ import Input from '../ui/input';
 import { Button } from '../ui/button';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { CheckCircle } from 'lucide-react';
 
 const CreateCategoryModal = () => {
   const router = useRouter();
@@ -59,10 +60,15 @@ const CreateCategoryModal = () => {
             />
           </div>
           <div className="flex flex-row justify-between">
-            <Button variant="default" onClick={handelAddCategory}>
-              Add new
+            <Button
+              disabled={!title}
+              variant="default"
+              onClick={handelAddCategory}
+              className="flex items-center gap-2"
+            >
+              <CheckCircle className="h-5 w-4" /> Apply
             </Button>
-            <Button variant="outline" onClick={handleClose}>
+            <Button variant="outline" onClick={handleClose} className="flex items-center">
               Cancel
             </Button>
           </div>

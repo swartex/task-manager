@@ -1,11 +1,12 @@
+import { FC, PropsWithChildren } from 'react';
 import Container from '@/components/Container';
 import SideBar from '@/components/SideBar';
 
-const DashboardLayout = ({ children }: { children: React.ReactNode }) => {
+const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <SideBar />
-      <Container className="pl-[200px] pt-12">{children}</Container>
+      <Container className="w-full pl-[220px] pt-12">{children}</Container>
     </>
   );
 };

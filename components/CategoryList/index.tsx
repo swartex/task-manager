@@ -14,6 +14,7 @@ import { Category } from '@prisma/client';
 import { useModal } from '@/hooks/useModal';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import { PlusCircle } from 'lucide-react';
 
 interface CategoryListProps {
   categories: (Category & {
@@ -27,7 +28,7 @@ export default function CategoryList({ categories }: CategoryListProps) {
   const { onOpen } = useModal();
   const router = useRouter();
 
-  const onDeleteCategory = async (id: string) => {
+  const handleDeleteCategory = async (id: string) => {
     await axios.delete('/api/v1/category', {
       data: {
         id,
@@ -37,9 +38,13 @@ export default function CategoryList({ categories }: CategoryListProps) {
   };
 
   return (
-    <div>
-      <Button variant="outline" onClick={() => onOpen('createCategory')}>
-        Add
+    <>
+      <Button
+        variant="outline"
+        onClick={() => onOpen('createCategory')}
+        className="flex items-center gap-2"
+      >
+        <PlusCircle className="h-4 w-4 text-green-800" /> Add new
       </Button>
       <Table>
         <TableCaption>A list of your categories.</TableCaption>
@@ -72,7 +77,7 @@ export default function CategoryList({ categories }: CategoryListProps) {
                 >
                   Update
                 </Button>
-                <Button variant="destructive" onClick={() => onDeleteCategory(item.id)}>
+                <Button variant="destructive" onClick={() => handleDeleteCategory(item.id)}>
                   Delete
                 </Button>
               </TableCell>
@@ -80,6 +85,6 @@ export default function CategoryList({ categories }: CategoryListProps) {
           ))}
         </TableBody>
       </Table>
-    </div>
+    </>
   );
 }

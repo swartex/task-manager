@@ -13,7 +13,7 @@ import { Button } from '@/components/ui/button';
 import { useModal } from '@/hooks/useModal';
 import { useToast } from '@/components/ui/use-toast';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
-import { Check, CheckCheck } from 'lucide-react';
+import { Check, CheckCheck, PlusCircle } from 'lucide-react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
 
@@ -41,8 +41,12 @@ export default function TodoList({ todos }: TodoListProps) {
 
   return (
     <>
-      <Button variant="outline" onClick={() => onOpen('createTodo')}>
-        Add
+      <Button
+        variant="outline"
+        onClick={() => onOpen('createTodo')}
+        className="flex items-center gap-2"
+      >
+        <PlusCircle className="h-4 w-4 text-green-800" /> Add new
       </Button>
       <Table>
         <TableCaption>All todos</TableCaption>

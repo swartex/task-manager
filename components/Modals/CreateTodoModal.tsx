@@ -19,6 +19,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
+import { CheckCircle } from 'lucide-react';
 
 const CreateTodoModal = () => {
   const router = useRouter();
@@ -119,8 +120,13 @@ const CreateTodoModal = () => {
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button disabled={!selectedCategory} variant="default" onClick={handelAddCategory}>
-              Add new
+            <Button
+              disabled={!selectedCategory}
+              variant="default"
+              onClick={handelAddCategory}
+              className="flex items-center gap-2"
+            >
+              <CheckCircle className="h-5 w-4" /> Apply
             </Button>
             <Button variant="outline" onClick={handleClose}>
               Cancel

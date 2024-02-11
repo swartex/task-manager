@@ -10,7 +10,7 @@ const Dashboard = async () => {
     },
     orderBy: [
       {
-        createdAt: 'asc',
+        updatedAt: 'desc',
       },
     ],
   });
