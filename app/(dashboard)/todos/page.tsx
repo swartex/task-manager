@@ -8,7 +8,7 @@ const TodosPage = async () => {
     },
     orderBy: [
       {
-        updatedAt: 'desc',
+        createdAt: 'desc',
       },
     ],
   });
