@@ -18,15 +18,14 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const { toast } = useToast();
   const { onOpen } = useModal();
   const handleCheckComplite = async (todoId: string, newStatus: boolean) => {
-    await axios.patch('api/v1/todo', {
-      todoId: todo.id,
+    await axios.patch('/api/v1/todo', {
       ...todo,
       status: newStatus,
     });
     router.refresh();
   };
   const handleDeleteTodo = async (todoId: string) => {
-    await axios.delete('api/v1/todo', {
+    await axios.delete('/api/v1/todo', {
       data: {
         todoId,
       },
@@ -46,15 +45,16 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       <span>{todo.title}</span>
       <div className="ml-auto flex max-w-[250px] flex-row gap-2 opacity-0 transition group-hover:opacity-100">
         <button
+          className="h-6 w-6 rounded p-[3px] transition hover:bg-slate-200"
           onClick={() => {
             onOpen('updateTodo', {
               todo,
             });
           }}
         >
-          <Edit3 className="h-4 w-4 text-sky-600" />
+          <Edit3 className="h-4 w-4 text-sky-600 transition " />
         </button>
-        <button>
+        <button className="h-6 w-6 rounded p-[3px] hover:bg-slate-200">
           <DeleteIcon className="h-4 w-4 text-red-500" onClick={() => handleDeleteTodo(todo.id)} />
         </button>
       </div>

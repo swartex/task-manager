@@ -37,6 +37,7 @@ model Category {
   Todos       Todo[]
   title       String
   description String?
+  slug        String?  @unique @db.VarChar(100)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }

@@ -12,10 +12,12 @@ const CreateCategoryModal = () => {
   const router = useRouter();
   const { isOpen, onClose, type } = useModal();
   const [title, setTitle] = useState<string>('');
+  const [slug, setSlug] = useState<string>('');
   const [description, setdescription] = useState<string>('');
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
+    setSlug(e.target.value.toLocaleLowerCase().trim().replaceAll(' ', '-'));
   };
 
   const handleChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
@@ -32,6 +34,7 @@ const CreateCategoryModal = () => {
     await axios.post('/api/v1/category', {
       title,
       description,
+      slug,
     });
     handleClose();
     router.refresh();
@@ -56,7 +59,15 @@ const CreateCategoryModal = () => {
               value={description}
               onChange={handleChangeDescription}
               type="text"
+              className="mb-4"
               placeholder="Category description"
+            />
+            <Input
+              className="text-zinc-500 text-opacity-80"
+              value={slug}
+              disabled
+              readOnly
+              type="text"
             />
           </div>
           <div className="flex flex-row justify-between">

@@ -14,12 +14,13 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
-  const { title, description } = body;
+  const { title, description, slug } = body;
   try {
     const newCategory = await prismadb.category.create({
       data: {
         title,
         description,
+        slug,
       },
     });
 

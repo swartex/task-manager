@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "Todo" (
-    "id" UUID NOT NULL,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
     "status" BOOLEAN NOT NULL DEFAULT false,
@@ -13,9 +13,10 @@ CREATE TABLE "Todo" (
 
 -- CreateTable
 CREATE TABLE "Category" (
-    "id" UUID NOT NULL,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "description" TEXT,
+    "slug" VARCHAR(100),
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
 
@@ -24,7 +25,7 @@ CREATE TABLE "Category" (
 
 -- CreateTable
 CREATE TABLE "Tag" (
-    "id" UUID NOT NULL,
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL,
@@ -35,9 +36,12 @@ CREATE TABLE "Tag" (
 
 -- CreateTable
 CREATE TABLE "_TodosTags" (
-    "A" UUID NOT NULL,
-    "B" UUID NOT NULL
+    "A" TEXT NOT NULL,
+    "B" TEXT NOT NULL
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "Category_slug_key" ON "Category"("slug");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "_TodosTags_AB_unique" ON "_TodosTags"("A", "B");

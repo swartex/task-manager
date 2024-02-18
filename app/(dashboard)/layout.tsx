@@ -6,7 +6,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <>
       <SideBar />
-      <Container className="w-full pl-[220px] pt-12">{children}</Container>
+      <Container className="w-full px-5 pl-[220px] pt-12">{children}</Container>
     </>
   );
 };
