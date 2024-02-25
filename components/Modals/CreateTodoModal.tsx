@@ -20,6 +20,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/u
 import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
 import { CheckCircle } from 'lucide-react';
+import DatePicker from '@/components/ui/DatePicker';
 
 const CreateTodoModal = () => {
   const router = useRouter();
@@ -109,19 +110,23 @@ const CreateTodoModal = () => {
                 </Select>
               )}
             </div>
-            <div className="flex items-center space-x-2 py-4">
-              <Switch id="status" onCheckedChange={handleChangeStatus} />
-              <label
-                htmlFor="status"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Status
-              </label>
+            <div className="flex items-center justify-between gap-4 py-4">
+              {/* todo: create logic */}
+              <DatePicker />
+              <div className="flex items-center space-x-2 py-4">
+                <Switch id="status" onCheckedChange={handleChangeStatus} />
+                <label
+                  htmlFor="status"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Status
+                </label>
+              </div>
             </div>
           </div>
           <div className="flex flex-row justify-between">
             <Button
-              disabled={!selectedCategory}
+              disabled={!selectedCategory || !title}
               variant="default"
               onClick={handelAddCategory}
               className="flex items-center gap-2"

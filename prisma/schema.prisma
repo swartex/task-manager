@@ -21,15 +21,16 @@ datasource db {
 // }
 
 model Todo {
-  id          String   @id @default(uuid())
+  id          String    @id @default(uuid())
   title       String
   description String?
-  status      Boolean  @default(false)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  status      Boolean   @default(false)
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  deadline    DateTime?
   category_id String
-  category    Category @relation(fields: [category_id], references: [id], onDelete: Cascade)
-  tags        Tag[]    @relation("TodosTags")
+  category    Category  @relation(fields: [category_id], references: [id], onDelete: Cascade)
+  tags        Tag[]     @relation("TodosTags")
 }
 
 model Category {

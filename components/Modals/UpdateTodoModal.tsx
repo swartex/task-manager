@@ -5,8 +5,8 @@ import { Category } from '@prisma/client';
 import axios from 'axios';
 import { ChangeEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Input from '../ui/input';
-import { Button } from '../ui/button';
+import Input from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import {
   Select,
   SelectContent,
@@ -19,6 +19,7 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
+import DatePicker from '@/components/ui/DatePicker';
 
 const UpdateTodoModal = () => {
   const router = useRouter();
@@ -121,14 +122,18 @@ const UpdateTodoModal = () => {
                 </Select>
               )}
             </div>
-            <div className="flex items-center space-x-2 py-4">
-              <Switch checked={status} id="status" onCheckedChange={handleChangeStatus} />
-              <label
-                htmlFor="status"
-                className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-              >
-                Status
-              </label>
+            <div className="flex items-center justify-between gap-4 py-4">
+              {/* todo: create logic */}
+              <DatePicker />
+              <div className="flex items-center space-x-2">
+                <Switch checked={status} id="status" onCheckedChange={handleChangeStatus} />
+                <label
+                  htmlFor="status"
+                  className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
+                >
+                  Status
+                </label>
+              </div>
             </div>
           </div>
           <div className="flex flex-row justify-between">

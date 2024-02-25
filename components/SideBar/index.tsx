@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import prisma from '@/libs/prismadb';
 import Link from 'next/link';
-import { Button } from '@/components/ui/button';
+import ActionButtons from './ActionButtons';
 
 const SideBar: FC = async () => {
   const categories = await prisma.category.findMany({
@@ -23,7 +23,7 @@ const SideBar: FC = async () => {
           <Link
             href={`/category/${category.id}`}
             key={category.id}
-            className="flex items-center justify-between gap-3 rounded-md p-2 transition hover:bg-zinc-200"
+            className="flex items-center justify-between gap-3 rounded-md p-2 transition hover:bg-blue-300/20"
           >
             {category.title}
             <span className="rounded-lg bg-slate-400/50 px-[10px] py-[3px] text-[10px] text-zinc-700">
@@ -33,14 +33,7 @@ const SideBar: FC = async () => {
         );
       })}
 
-      <div className="mt-auto flex flex-col gap-3">
-        <Button variant="secondary" className="w-full" size="sm">
-          Create new todo
-        </Button>
-        <Button variant="secondary" className="w-full" size="sm">
-          Create new category
-        </Button>
-      </div>
+      <ActionButtons />
     </aside>
   );
 };
