@@ -10,6 +10,7 @@ import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
 import { useModal } from '@/hooks/useModal';
 import { format } from 'date-fns';
 import Tag from '@/components/ui/Tag';
+import { cn } from '@/libs/utils';
 
 interface TodoItemProps {
   todo: TodoWithCategory;
@@ -21,7 +22,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const { onOpen } = useModal();
   const handleCheckComplite = async (todoId: string, newStatus: boolean) => {
     await axios.patch('/api/v1/todo', {
-      ...todo,
+      id: todoId,
       status: newStatus,
     });
     router.refresh();
@@ -40,13 +41,15 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   };
 
   return (
-    <div className="group rounded-md p-3 shadow-md ">
+    <div className={cn('group rounded-md p-3 shadow-md', todo.status && 'opacity-70')}>
       <div className="flex flex-row items-center gap-5">
         <Checkbox
           onCheckedChange={(status) => handleCheckComplite(todo.id, !!status)}
           checked={todo.status}
         />{' '}
-        <span>{todo.title}</span>
+        <span className={cn('font-semibold', todo.status && 'text-muted-foreground line-through')}>
+          {todo.title}
+        </span>
         <div className="ml-auto flex max-w-[250px] flex-row gap-2 opacity-0 transition group-hover:opacity-100">
           <button
             className="h-6 w-6 rounded p-[3px] transition hover:bg-slate-200"

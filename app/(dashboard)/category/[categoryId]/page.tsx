@@ -8,6 +8,7 @@ export default async function SingleCategoryPage({ params }: { params: IParams }
   const todos = await prisma.todo.findMany({
     where: {
       category_id: params.categoryId,
+      // status: false,
     },
     include: {
       category: true,
