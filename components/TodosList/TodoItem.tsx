@@ -38,6 +38,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       description: `Toto was been deleted`,
     });
   };
+
   return (
     <div className="group rounded-md p-3 shadow-md ">
       <div className="flex flex-row items-center gap-5">
@@ -65,11 +66,11 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
           </button>
         </div>
       </div>
-      <div className="flex items-center gap-1 pl-9 pt-2 text-[10px] text-zinc-400 group-hover:visible">
-        <CalendarClock className="h-3 w-3" />
-        {format(new Date(todo.createdAt), 'd MMM yyyy, HH:mm')}
+      <div className="flex items-center gap-1 pl-9 pt-2 text-[10px] leading-none text-zinc-400 group-hover:visible">
+        <CalendarClock className="h-3 w-3" />{' '}
+        {todo.deadline && format(new Date(todo.deadline), 'd MMM yyyy, HH:mm')}
         <div className="ml-4 flex items-center gap-2">
-          <Tags className="h-4 w-4" />
+          <Tags className="h-3 w-3" />
           <Tag title="tags" />
         </div>
       </div>

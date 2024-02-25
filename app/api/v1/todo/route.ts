@@ -10,13 +10,14 @@ export const GET = async () => {
 export const POST = async (req: NextRequest) => {
   const body = await req.json();
 
-  const { title, description, status, categoryId } = body;
+  const { title, description, status, deadline, categoryId } = body;
   try {
     const newTodo = await prismadb.todo.create({
       data: {
         title,
         description,
         status,
+        deadline,
         category_id: categoryId,
       },
     });
@@ -30,7 +31,7 @@ export const POST = async (req: NextRequest) => {
 export const PATCH = async (req: NextRequest) => {
   const body = await req.json();
 
-  const { id, title, description, status, categoryId } = body;
+  const { id, title, description, status, deadline, categoryId } = body;
 
   try {
     const updateTodo = await prismadb.todo.update({
@@ -41,6 +42,7 @@ export const PATCH = async (req: NextRequest) => {
         title,
         description,
         status,
+        deadline,
         category_id: categoryId,
       },
     });

@@ -17,11 +17,13 @@ import {
 import { cn } from '@/libs/utils';
 
 interface DatePickerProps {
-  onDateChange: () => void;
+  onDateChange: (value: Date | undefined) => void;
+  defaultDate?: Date;
+  className?: string;
 }
 
-const DatePicker: FC = () => {
-  const [date, setDate] = useState<Date>();
+const DatePicker: FC<DatePickerProps> = ({ onDateChange, className, defaultDate }) => {
+  const [date, setDate] = useState<Date | undefined>(defaultDate);
 
   return (
     <Popover>
@@ -31,6 +33,7 @@ const DatePicker: FC = () => {
           className={cn(
             'w-[280px] justify-start text-left font-normal',
             !date && 'text-muted-foreground',
+            className,
           )}
         >
           <CalendarIcon className="mr-2 h-4 w-4" />
@@ -50,7 +53,14 @@ const DatePicker: FC = () => {
           </SelectContent>
         </Select>
         <div className="rounded-md border">
-          <Calendar mode="single" selected={date} onSelect={setDate} />
+          <Calendar
+            mode="single"
+            selected={date}
+            onSelect={(value) => {
+              setDate(value);
+              onDateChange(value);
+            }}
+          />
         </div>
       </PopoverContent>
     </Popover>

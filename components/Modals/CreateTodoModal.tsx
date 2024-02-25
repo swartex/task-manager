@@ -30,6 +30,7 @@ const CreateTodoModal = () => {
   const [status, setStatus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [deadline, setDeadline] = useState<Date | undefined>(undefined);
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -44,6 +45,7 @@ const CreateTodoModal = () => {
     setStatus(false);
     setSelectedCategory('');
     setdescription('');
+    setDeadline(undefined);
     onClose();
   };
 
@@ -52,6 +54,7 @@ const CreateTodoModal = () => {
       title,
       description,
       status,
+      deadline,
       categoryId: selectedCategory,
     });
     handleClose();
@@ -111,8 +114,7 @@ const CreateTodoModal = () => {
               )}
             </div>
             <div className="flex items-center justify-between gap-4 py-4">
-              {/* todo: create logic */}
-              <DatePicker />
+              <DatePicker onDateChange={setDeadline} />
               <div className="flex items-center space-x-2 py-4">
                 <Switch id="status" onCheckedChange={handleChangeStatus} />
                 <label
