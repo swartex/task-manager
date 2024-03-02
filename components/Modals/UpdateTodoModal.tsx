@@ -106,28 +106,27 @@ const UpdateTodoModal = () => {
               placeholder="Todo description"
             />
             <div className="py-4">
-              {categories && (
-                <Select
-                  defaultValue={data.todo?.category_id}
-                  onValueChange={(value) => setSelectedCategory(value)}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Select a category" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectLabel>Categories</SelectLabel>
-                      {categories.map((category) => {
+              <Select
+                defaultValue={data.todo?.category_id}
+                onValueChange={(value) => setSelectedCategory(value)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a category" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectGroup>
+                    <SelectLabel>Categories</SelectLabel>
+                    {categories &&
+                      categories.map((category) => {
                         return (
                           <SelectItem key={category.id} value={category.id}>
                             {category.title}
                           </SelectItem>
                         );
                       })}
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              )}
+                  </SelectGroup>
+                </SelectContent>
+              </Select>
             </div>
             <div className="flex items-center justify-between gap-4 py-4">
               <DatePicker defaultDate={deadline} onDateChange={setDeadline} />
