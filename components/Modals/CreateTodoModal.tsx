@@ -126,6 +126,9 @@ const CreateTodoModal = () => {
             </div>
           </div>
           <div className="flex flex-row justify-between">
+            <Button variant="outline" onClick={handleClose}>
+              Cancel
+            </Button>
             <Button
               disabled={!selectedCategory || !title}
               variant="default"
@@ -133,9 +136,6 @@ const CreateTodoModal = () => {
               className="flex items-center gap-2"
             >
               <CheckCircle className="h-5 w-4" /> Apply
-            </Button>
-            <Button variant="outline" onClick={handleClose}>
-              Cancel
             </Button>
           </div>
         </DialogHeader>

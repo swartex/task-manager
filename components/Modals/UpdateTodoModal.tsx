@@ -142,11 +142,11 @@ const UpdateTodoModal = () => {
             </div>
           </div>
           <div className="flex flex-row justify-between">
-            <Button variant="default" onClick={handelAddCategory}>
-              Update
-            </Button>
             <Button variant="outline" onClick={handleClose}>
               Cancel
+            </Button>
+            <Button variant="default" onClick={handelAddCategory}>
+              Update
             </Button>
           </div>
         </DialogHeader>
