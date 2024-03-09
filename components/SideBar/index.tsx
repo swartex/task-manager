@@ -23,23 +23,21 @@ const SideBar: FC = async () => {
     ],
   });
   return (
-    <aside className="fixed left-0 top-0 z-30 flex h-full w-[200px] min-w-[200px] flex-col gap-4 bg-slate-100/50 px-2 py-3">
+    <aside className="w-[300px] border-r-2 border-slate-300/20">
       {categories.map((category) => {
         return (
           <Link
             href={`/category/${category.id}`}
             key={category.id}
-            className="flex items-center justify-between gap-3 rounded-md p-2 transition hover:bg-blue-300/20"
+            className="flex items-center justify-between gap-3 px-6 py-3 transition hover:bg-blue-300/20"
           >
             {category.title}
-            <span className="rounded-lg bg-slate-400/50 px-[10px] py-[3px] text-[10px] text-zinc-700">
-              {category._count.Todos}
-            </span>
+            <span className="text-[12px] font-semibold text-zinc-700">{category._count.Todos}</span>
           </Link>
         );
       })}
 
-      <ActionButtons />
+      {/* <ActionButtons /> */}
     </aside>
   );
 };
