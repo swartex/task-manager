@@ -1,13 +1,17 @@
 import { FC, PropsWithChildren } from 'react';
 import Container from '@/components/Container';
 import SideBar from '@/components/SideBar';
+import Header from '@/components/Header';
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   return (
-    <div className="flex h-full">
-      <SideBar />
-      <Container className="w-full px-5 pt-12">{children}</Container>
-    </div>
+    <>
+      <Header />
+      <div className="flex h-full">
+        <SideBar />
+        <Container className="w-full px-5 pt-5">{children}</Container>
+      </div>
+    </>
   );
 };
 

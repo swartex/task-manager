@@ -8,13 +8,13 @@ export default async function SingleCategoryPage({ params }: { params: IParams }
   const todos = await prisma.todo.findMany({
     where: {
       category_id: params.categoryId,
-      // status: false,
+      status: false,
     },
     include: {
       category: true,
     },
   });
-
+  console.log(todos)
   if (!todos.length) return <div>No todos</div>;
 
   return (

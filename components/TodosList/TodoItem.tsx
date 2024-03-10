@@ -87,7 +87,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         {!isEdit && (
           <span
             onClick={() => setIsEdit(true)}
-            className={cn('font-semibold', todo.status && 'text-muted-foreground line-through')}
+            className={cn('font-medium', todo.status && 'text-muted-foreground line-through')}
           >
             {todo.title}
           </span>

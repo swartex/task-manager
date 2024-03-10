@@ -31,6 +31,8 @@ model Todo {
   category_id String
   category    Category  @relation(fields: [category_id], references: [id], onDelete: Cascade)
   tags        Tag[]     @relation("TodosTags")
+
+  @@index([id, category_id])
 }
 
 model Category {
@@ -41,6 +43,8 @@ model Category {
   slug        String?  @unique @db.VarChar(100)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
+
+  @@index([slug, id])
 }
 
 model Tag {
