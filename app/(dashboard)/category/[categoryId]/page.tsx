@@ -1,3 +1,4 @@
+import TodoList from '@/components/TodosList';
 import TodoItem from '@/components/TodosList/TodoItem';
 import prisma from '@/libs/prismadb';
 
@@ -14,14 +15,8 @@ export default async function SingleCategoryPage({ params }: { params: IParams }
       category: true,
     },
   });
-  console.log(todos)
-  if (!todos.length) return <div>No todos</div>;
 
   return (
-    <div>
-      {todos.map((todo) => (
-        <TodoItem key={todo.id} todo={todo} />
-      ))}
-    </div>
+    <TodoList todos={todos} />
   );
 }

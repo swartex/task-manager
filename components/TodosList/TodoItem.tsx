@@ -1,6 +1,6 @@
 'use client';
 
-import { FC, useState, useRef, FocusEvent, useEffect, KeyboardEvent } from 'react';
+import { FC, useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
 import axios from 'axios';
@@ -58,8 +58,6 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   }, [editInputRef.current, isEdit]);
 
   const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>, todo: Todo) => {
-    console.log(e.key);
-    //
     if (e.key === 'Enter') {
       if (newTitle !== todo.title) {
         await axios.patch('/api/v1/todo', {
