@@ -135,7 +135,7 @@ const CreateTodoModal = () => {
               onClick={handelAddCategory}
               className="flex items-center gap-2"
             >
-              <CheckCircle className="h-5 w-4" /> Apply
+              <CheckCircle size={20} /> Apply
             </Button>
           </div>
         </DialogHeader>

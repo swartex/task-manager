@@ -5,6 +5,7 @@ import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from '@/compone
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/libs/utils';
+import Hint from '@/components/ui/Hint';
 
 interface ActionsProps {
   onAddTodo?: () => void;
@@ -20,7 +21,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
   };
 
   return (
-    <div className="flex h-[40px] items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
+    <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
       <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
         <PopoverTrigger asChild>
           <button
@@ -29,17 +30,26 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
               selectedDate && 'bg-white',
             )}
           >
-            <CalendarDays className="h-4 w-4 opacity-75" />{' '}
+            <Hint title="Due date">
+              <CalendarDays size={16} className="opacity-75" />
+            </Hint>
             {selectedDate && format(selectedDate, 'PP')}
           </button>
         </PopoverTrigger>
         <PopoverContent className="w-max">
+          <strong className="block border-b pb-3 text-center text-lg">Due</strong>
           <Calendar
             mode="single"
             selected={selectedDate ?? new Date()}
             onSelect={(newDate) => onSelectDate(newDate as Date)}
+            className="border-b"
           />
-          <Button onClick={() => setCalendarOpen(false)} className="mt-4 w-full" variant="default" size="sm">
+          <Button
+            onClick={() => setCalendarOpen(false)}
+            className="mt-4 w-full"
+            variant="default"
+            size="sm"
+          >
             Save
           </Button>
 
@@ -57,10 +67,14 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
         </PopoverContent>
       </Popover>
       <button className="rounded p-1 transition hover:bg-zinc-300/40">
-        <Bell className="h-4 w-4 opacity-75" />
+        <Hint title="Remind me">
+          <Bell size={16} className="opacity-75" />
+        </Hint>
       </button>
       <button className="rounded p-1 transition hover:bg-zinc-300/40">
-        <Repeat className="h-4 w-4 opacity-75" />
+        <Hint title="Repeat">
+          <Repeat size={16} className="opacity-75" />
+        </Hint>
       </button>
       <Button
         disabled={disabled}

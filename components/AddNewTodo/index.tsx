@@ -50,10 +50,10 @@ const AddNewTodo: FC = () => {
       )}
     >
       <div className='flex items-center px-4'>
-        <Plus className={cn('h-4 w-4 text-blue-600 transition-all', focused && 'text-black')} />
+        <Plus size={16} className={cn('text-blue-600 transition-all', focused && 'text-black')} />
         <input
           type="text"
-          className="h-10 w-full bg-transparent px-4 py-3 text-sm font-normal outline-none placeholder:text-blue-600 focus-within:outline-none focus:outline-none focus:placeholder:text-black active:outline-none disabled:text-muted"
+          className="h-10 w-full bg-transparent p-4 text-sm font-normal outline-none placeholder:text-blue-600 focus-within:outline-none focus:outline-none focus:placeholder:text-black active:outline-none disabled:text-muted"
           value={newTodo}
           onChange={handleChange}
           onFocus={() => setFocused(true)}

@@ -76,7 +76,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   };
 
   return (
-    <div className={cn('group rounded-md p-3 shadow-md bg-white', todo.status && 'opacity-70')}>
+    <div className={cn('group rounded-md bg-white p-3 shadow-md', todo.status && 'opacity-70')}>
       <div className="flex flex-row items-center gap-5">
         <Checkbox
           onCheckedChange={(status) => handleCheckComplite(todo.id, !!status)}
@@ -105,18 +105,19 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         )}
         <div className="ml-auto flex max-w-[250px] flex-row gap-2 opacity-0 transition group-hover:opacity-100">
           <button
-            className="h-6 w-6 rounded p-[3px] transition hover:bg-slate-200"
+            className="h-6 w-6 rounded p-1 transition hover:bg-slate-200"
             onClick={() => {
               onOpen('updateTodo', {
                 todo,
               });
             }}
           >
-            <Edit3 className="h-4 w-4 text-sky-600 transition " />
+            <Edit3 size={16} className="text-sky-600 transition" />
           </button>
-          <button className="h-6 w-6 rounded p-[3px] hover:bg-slate-200">
+          <button className="h-6 w-6 rounded p-1 hover:bg-slate-200">
             <DeleteIcon
-              className="h-4 w-4 text-red-500"
+              size={16}
+              className="text-red-500"
               onClick={() => handleDeleteTodo(todo.id)}
             />
           </button>
@@ -125,14 +126,14 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
       <div className="flex items-center gap-1 pl-9 pt-2 text-[10px] leading-none text-zinc-400 group-hover:visible">
         {todo.deadline && (
           <>
-            <CalendarClock className="h-3 w-3" />{' '}
+            <CalendarClock size={12} />{' '}
             <span className="mr-4">
               {todo.deadline && format(new Date(todo.deadline), 'd MMM yyyy, HH:mm')}
             </span>
           </>
         )}
         <div className="flex items-center gap-2">
-          <Tags className="h-3 w-3" />
+          <Tags size={12} />
           <Tag title="tags" />
         </div>
       </div>
