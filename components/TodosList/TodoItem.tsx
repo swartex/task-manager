@@ -76,7 +76,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   };
 
   return (
-    <div className={cn('group rounded-md p-3 shadow-md', todo.status && 'opacity-70')}>
+    <div className={cn('group rounded-md p-3 shadow-md bg-white', todo.status && 'opacity-70')}>
       <div className="flex flex-row items-center gap-5">
         <Checkbox
           onCheckedChange={(status) => handleCheckComplite(todo.id, !!status)}

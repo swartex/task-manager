@@ -22,7 +22,7 @@ const SideBar: FC = async () => {
     ],
   });
   return (
-    <aside className="w-[300px] border-r-2 border-slate-300/20 hidden sm:block">
+    <aside className="w-[300px] border-r-2 border-slate-300/20 hidden sm:block bg-white">
       <ul>
         {categories.map((category) => {
           return (

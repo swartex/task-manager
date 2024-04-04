@@ -25,7 +25,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
         <PopoverTrigger asChild>
           <button
             className={cn(
-              'flex items-center gap-2 rounded p-[4px] transition hover:bg-zinc-300/40',
+              'flex items-center gap-2 rounded p-1 transition hover:bg-zinc-300/40',
               selectedDate && 'bg-white',
             )}
           >
@@ -56,10 +56,10 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
           </Button>
         </PopoverContent>
       </Popover>
-      <button className="rounded p-[4px] transition hover:bg-zinc-300/40">
+      <button className="rounded p-1 transition hover:bg-zinc-300/40">
         <Bell className="h-4 w-4 opacity-75" />
       </button>
-      <button className="rounded p-[4px] transition hover:bg-zinc-300/40">
+      <button className="rounded p-1 transition hover:bg-zinc-300/40">
         <Repeat className="h-4 w-4 opacity-75" />
       </button>
       <Button

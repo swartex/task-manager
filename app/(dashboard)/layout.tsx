@@ -9,7 +9,7 @@ const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
       <Header />
       <div className="flex h-full">
         <SideBar />
-        <Container className="w-full px-5 pt-5 bg-[#faf9f8]">{children}</Container>
+        <Container className="w-full px-5 pt-5">{children}</Container>
       </div>
     </>
   );
