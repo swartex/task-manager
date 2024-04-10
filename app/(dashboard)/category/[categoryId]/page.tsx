@@ -14,6 +14,11 @@ export default async function SingleCategoryPage({ params }: { params: IParams }
     include: {
       category: true,
     },
+    orderBy: [
+      {
+        createdAt: 'desc',
+      },
+    ],
   });
 
   return (

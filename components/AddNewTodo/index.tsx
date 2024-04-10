@@ -1,9 +1,9 @@
 'use client';
 
-import { Plus } from 'lucide-react';
-import { ChangeEvent, FC, useState, KeyboardEvent } from 'react';
-import { cn } from '@/libs/utils';
 import axios from 'axios';
+import { cn } from '@/libs/utils';
+import { ChangeEvent, FC, useState, KeyboardEvent } from 'react';
+import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import Actions from './Actions';
 
@@ -63,7 +63,7 @@ const AddNewTodo: FC = () => {
           disabled={disabled}
         />
       </div>
-      <Actions disabled={disabled} onAddTodo={handleAdd} />
+      <Actions disabled={newTodo === ''} onAddTodo={handleAdd} />
     </div>
   );
 };

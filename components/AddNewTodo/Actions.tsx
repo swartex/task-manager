@@ -12,13 +12,19 @@ interface ActionsProps {
   disabled?: boolean;
 }
 
-const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
+const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
   };
+
+  const handleCancel = () => {
+    // reset date and close calendar
+    setSelectedDate(undefined);
+    setCalendarOpen(false);
+  }
 
   return (
     <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
@@ -57,10 +63,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
             className="mt-4 w-full"
             variant="destructive"
             size="sm"
-            onClick={() => {
-              setSelectedDate(undefined);
-              setCalendarOpen(false);
-            }}
+            onClick={handleCancel}
           >
             Clear date
           </Button>
@@ -78,7 +81,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = false }) => {
       </button>
       <Button
         disabled={disabled}
-        className="ml-auto h-7 rounded-none hover:disabled:cursor-not-allowed"
+        className="ml-auto h-7 rounded-none disabled:hover:cursor-default"
         variant="outline"
         size="sm"
         onClick={onAddTodo}
