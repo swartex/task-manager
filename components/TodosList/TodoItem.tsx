@@ -3,8 +3,7 @@
 import { FC, useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
 import { useModal } from '@/hooks/useModal';
@@ -13,13 +12,16 @@ import Tag from '@/components/ui/Tag';
 import Input from '@/components/ui/input';
 import { cn } from '@/libs/utils';
 import { Todo } from '@prisma/client';
+import { useAction } from '@/hooks/useAction';
+import { deleteTodo } from '@/actions/deleteTodo';
+import { updateTodo } from '@/actions/updateTodo';
 
 interface TodoItemProps {
   todo: TodoWithCategory;
 }
 
 const TodoItem: FC<TodoItemProps> = ({ todo }) => {
-  const router = useRouter();
+  const params = useParams();
   const { toast } = useToast();
   const { onOpen } = useModal();
   const [isEdit, setIsEdit] = useState<boolean>(false);
@@ -27,28 +29,29 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
 
   const editInputRef = useRef<HTMLInputElement>(null);
 
-  const handleCheckComplite = async (todoId: string, newStatus: boolean) => {
-    await axios.patch('/api/v1/todo', {
-      id: todoId,
-      status: newStatus,
-    });
-    router.refresh();
-  };
+  const { execute: executeDelete } = useAction(deleteTodo, {
+    onSuccess: (data) => {
+      toast({
+        variant: 'success',
+        description: `Todo "${data.title} was been deleted`,
+      });
+    },
+  });
+
+  const { execute: executeUpdate } = useAction(updateTodo, {
+    onSuccess: (data) => {
+      toast({
+        variant: 'success',
+        description: `Todo "${data.title}" was updated`,
+      });
+    },
+  });
+
   const handleDeleteTodo = (todoId: string) => {
-    axios
-      .delete('/api/v1/todo', {
-        data: {
-          todoId,
-        },
-      })
-      .then(() => {
-        router.refresh();
-        toast({
-          variant: 'success',
-          description: `Toto was been deleted`,
-        });
-      })
-      .catch(() => {});
+    executeDelete({
+      id: todoId,
+      categoryId: params.categoryId as string,
+    });
   };
 
   useEffect(() => {
@@ -60,19 +63,24 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
   const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>, todo: Todo) => {
     if (e.key === 'Enter') {
       if (newTitle !== todo.title) {
-        await axios.patch('/api/v1/todo', {
+        executeUpdate({
           id: todo.id,
-          title: newTitle,
-        });
-        router.refresh();
+          title: newTitle
+        })
       }
       setIsEdit(false);
       setNewTitle(todo.title);
     }
     if (e.key === 'Escape') {
       setIsEdit(false);
-      setNewTitle(todo.title);
     }
+  };
+
+  const handleCheckComplite = async (todoId: string, newStatus: boolean) => {
+    executeUpdate({
+      id: todoId,
+      status: newStatus,
+    })
   };
 
   return (
