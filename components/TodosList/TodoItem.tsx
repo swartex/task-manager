@@ -3,8 +3,7 @@
 import { FC, useState, useRef, useEffect, KeyboardEvent } from 'react';
 import { Checkbox } from '@/components/ui/checkbox';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
-import { useParams } from 'next/navigation';
-import { useToast } from '@/components/ui/use-toast';
+import { toast } from 'sonner';
 import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
 import { useModal } from '@/hooks/useModal';
 import { format } from 'date-fns';
@@ -21,8 +20,6 @@ interface TodoItemProps {
 }
 
 const TodoItem: FC<TodoItemProps> = ({ todo }) => {
-  const params = useParams();
-  const { toast } = useToast();
   const { onOpen } = useModal();
   const [isEdit, setIsEdit] = useState<boolean>(false);
   const [newTitle, setNewTitle] = useState<string>(todo.title);
@@ -31,26 +28,19 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
 
   const { execute: executeDelete } = useAction(deleteTodo, {
     onSuccess: (data) => {
-      toast({
-        variant: 'success',
-        description: `Todo "${data.title} was been deleted`,
-      });
+      toast.warning(`Todo "${data.title} was been deleted`);
     },
   });
 
   const { execute: executeUpdate } = useAction(updateTodo, {
     onSuccess: (data) => {
-      toast({
-        variant: 'success',
-        description: `Todo "${data.title}" was updated`,
-      });
+      toast.success(`Todo "${data.title}" was updated`);
     },
   });
 
   const handleDeleteTodo = (todoId: string) => {
     executeDelete({
       id: todoId,
-      categoryId: params.categoryId as string,
     });
   };
 

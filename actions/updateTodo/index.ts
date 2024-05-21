@@ -9,7 +9,7 @@ import { UpdateTodo } from './schema';
 import { InputType, ReturnType } from './types';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { id, categoryId, ...rest } = data;
+  const { id, category_id, ...rest } = data;
 
   let updatedTodo;
 
@@ -23,7 +23,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     updatedTodo = await prisma.todo.update({
       where: { id },
       data: {
-        category_id: categoryId,
+        category_id,
         ...rest,
       }
     });
@@ -33,7 +33,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  revalidatePath(`/category/${categoryId}`);
+  revalidatePath(`/category/${category_id}`);
   return { data: updatedTodo };
 };
 

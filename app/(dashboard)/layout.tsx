@@ -1,5 +1,5 @@
 import { FC, PropsWithChildren } from 'react';
-import Container from '@/components/Container';
+import Container from '@/components/ui/Container';
 import SideBar from '@/components/SideBar';
 import Header from '@/components/Header';
 

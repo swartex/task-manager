@@ -9,7 +9,7 @@ import { DeleteTodo } from './schema';
 import { InputType, ReturnType } from './types';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
-  const { id, categoryId } = data;
+  const { id } = data;
 
   let deletedTodo;
 
@@ -29,7 +29,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     };
   }
 
-  revalidatePath(`/category/${categoryId}`);
+  revalidatePath(`/category/${deletedTodo.category_id}`);
   return { data: deletedTodo };
 };
 

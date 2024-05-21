@@ -4863,6 +4863,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"sonner@npm:^1.4.41":
+  version: 1.4.41
+  resolution: "sonner@npm:1.4.41"
+  peerDependencies:
+    react: ^18.0.0
+    react-dom: ^18.0.0
+  checksum: 10c0/31467ecab0fcbd5161fb76d158c698841b524686f7f598eecbc2a58d76bc496b5d5242df4350e274575aa3df59428d3aacd534415c968b19fc309c192c443330
+  languageName: node
+  linkType: hard
+
 "source-map-js@npm:^1.0.2":
   version: 1.0.2
   resolution: "source-map-js@npm:1.0.2"
@@ -5177,6 +5187,7 @@ __metadata:
     react: "npm:18.3.1"
     react-day-picker: "npm:^8.10.1"
     react-dom: "npm:18.3.1"
+    sonner: "npm:^1.4.41"
     tailwind-merge: "npm:^2.3.0"
     tailwindcss: "npm:3.4.3"
     tailwindcss-animate: "npm:^1.0.7"

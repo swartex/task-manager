@@ -2,11 +2,10 @@
 
 import { useModal } from '@/hooks/useModal';
 import { Category } from '@prisma/client';
-import axios from 'axios';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Input from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
+import { useAction } from '@/hooks/useAction';
+import { toast } from 'sonner';
+import { updateTodo } from '@/actions/updateTodo';
 import {
   Select,
   SelectContent,
@@ -16,13 +15,14 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import Input from '@/components/ui/input';
+import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
 import DatePicker from '@/components/ui/DatePicker';
 
 const UpdateTodoModal = () => {
-  const router = useRouter();
   const { isOpen, onClose, type, data } = useModal();
   const [title, setTitle] = useState<string>('');
   const [description, setdescription] = useState<string>('');
@@ -48,17 +48,25 @@ const UpdateTodoModal = () => {
     onClose();
   };
 
-  const handelAddCategory = async () => {
-    await axios.patch('/api/v1/todo', {
-      id: data.todo!.id,
+  const { execute } = useAction(updateTodo, {
+    onSuccess: (data) => {
+      toast.success(`Todo "${data.title}" was updated`);
+    },
+    onError: (error) => toast.error(error),
+  });
+
+  const handelAddTodo = async () => {
+    if (!data.todo) return;
+
+    execute({
+      id: data.todo.id,
       title,
       description,
       status,
       deadline,
-      categoryId: selectedCategory,
+      category_id: selectedCategory,
     });
     handleClose();
-    router.refresh();
   };
 
   const handleChangeStatus = (value: boolean) => {
@@ -145,7 +153,7 @@ const UpdateTodoModal = () => {
             <Button variant="outline" onClick={handleClose}>
               Cancel
             </Button>
-            <Button variant="default" onClick={handelAddCategory}>
+            <Button variant="default" onClick={handelAddTodo}>
               Update
             </Button>
           </div>

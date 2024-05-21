@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { Toaster } from '@/components/ui/toaster';
+import { Toaster } from 'sonner';
 
 const ToasterProvider = () => {
   const [isMounted, setIsMounted] = useState<boolean>(false);
@@ -15,7 +15,7 @@ const ToasterProvider = () => {
   }
   return (
     <>
-      <Toaster />
+      <Toaster closeButton richColors position="bottom-right" />
     </>
   );
 };

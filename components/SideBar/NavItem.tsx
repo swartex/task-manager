@@ -28,7 +28,7 @@ const NavItem: FC<NavItemProps> = ({id, title, count, marker = 'default' }) => {
   const params = useParams();
 
 
-  // todo: need fix active element
+  // FIXME: need fix active element
   return (
     <li
       className={cn(
