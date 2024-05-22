@@ -21,6 +21,9 @@ import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
 import { CheckCircle } from 'lucide-react';
 import DatePicker from '@/components/ui/DatePicker';
+import { useAction } from '@/hooks/useAction';
+import { createTodo } from '@/actions/createTodo';
+import { toast } from 'sonner';
 
 const CreateTodoModal = () => {
   const router = useRouter();
@@ -32,6 +35,14 @@ const CreateTodoModal = () => {
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [deadline, setDeadline] = useState<Date | undefined>(undefined);
 
+  const { execute } = useAction(createTodo, {
+    onSuccess: (data) => {
+      toast.success(`Todo "${data.title}" was create!`);
+      handleClose();
+    },
+    onError: (error) => toast.error(error),
+  });
+
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
   };
@@ -40,7 +51,7 @@ const CreateTodoModal = () => {
     setdescription(e.target.value);
   };
 
-  const handleClose = () => {
+  function handleClose () {
     setTitle('');
     setStatus(false);
     setSelectedCategory('');
@@ -49,16 +60,25 @@ const CreateTodoModal = () => {
     onClose();
   };
 
-  const handelAddCategory = async () => {
-    await axios.post('/api/v1/todo', {
-      title,
-      description,
-      status,
-      deadline,
-      categoryId: selectedCategory,
-    });
-    handleClose();
-    router.refresh();
+  const handelAddCategory = () => {
+    // await axios.post('/api/v1/todo', {
+    //   title,
+    //   description,
+    //   status,
+    //   deadline,
+    //   categoryId: selectedCategory,
+    // });
+
+    //FIXME: need refactor setSelectedCategory
+    if (selectedCategory) {
+      execute({
+        title,
+        description,
+        status,
+        deadline,
+        category_id: selectedCategory,
+      });
+    }
   };
 
   const handleChangeStatus = (value: boolean) => {

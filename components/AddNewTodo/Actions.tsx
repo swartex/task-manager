@@ -61,7 +61,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
 
           <Button
             className="mt-4 w-full"
-            variant="destructive"
+            variant="outline"
             size="sm"
             onClick={handleCancel}
           >
