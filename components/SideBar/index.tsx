@@ -31,7 +31,7 @@ const SideBar: FC = async () => {
               id={category.id}
               title={category.title}
               count={category._count.Todos}
-              marker='work' // todo: need fix this
+              // marker='work' // TODO: need fix this
             />
           );
         })}

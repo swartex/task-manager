@@ -1,11 +1,13 @@
 'use client';
 
-import axios from 'axios';
 import { cn } from '@/libs/utils';
 import { ChangeEvent, FC, useState, KeyboardEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { useParams, useRouter } from 'next/navigation';
 import Actions from './Actions';
+import { useAction } from '@/hooks/useAction';
+import { createTodo } from '@/actions/createTodo';
+import { toast } from 'sonner';
 
 const AddNewTodo: FC = () => {
   const [newTodo, setNewTodo] = useState<string>('');
@@ -13,6 +15,13 @@ const AddNewTodo: FC = () => {
   const [disabled, setDisabled] = useState<boolean>(false);
   const params = useParams();
   const router = useRouter();
+  const { execute } = useAction(createTodo, {
+    onSuccess: (data) => {
+      toast.success(`Todo ${data.title} created!`);
+      setNewTodo('');
+      setDisabled(false);
+    },
+  });
 
   if (!params?.categoryId) return null;
 
@@ -22,18 +31,14 @@ const AddNewTodo: FC = () => {
 
   const handleAdd = async () => {
     if (newTodo === '') return;
-
-    setDisabled(true);
-    await axios.post('/api/v1/todo', {
+    execute({
       title: newTodo,
-      categoryId: params?.categoryId,
+      category_id: params.categoryId as string,
+      status: false,
     });
 
-    setNewTodo('');
-    setDisabled(false);
     router.refresh();
-  }
-
+  };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -41,15 +46,14 @@ const AddNewTodo: FC = () => {
     }
   };
 
-
   return (
     <div
       className={cn(
-        'rounded bg-white shadow transition-all overflow-hidden mb-4',
+        'mb-4 overflow-hidden rounded bg-white shadow transition-all',
         focused && 'shadow-blue-600',
       )}
     >
-      <div className='flex items-center px-4'>
+      <div className="flex items-center px-4">
         <Plus size={16} className={cn('text-blue-600 transition-all', focused && 'text-black')} />
         <input
           type="text"

@@ -4,16 +4,25 @@ import { useModal } from '@/hooks/useModal';
 import { ChangeEvent, useState } from 'react';
 import Input from '../ui/input';
 import { Button } from '../ui/button';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import { CheckCircle } from 'lucide-react';
+import { useAction } from '@/hooks/useAction';
+import { createCategory } from '@/actions/createCategory';
+import { toast } from 'sonner';
 
 const CreateCategoryModal = () => {
-  const router = useRouter();
   const { isOpen, onClose, type } = useModal();
   const [title, setTitle] = useState<string>('');
   const [slug, setSlug] = useState<string>('');
   const [description, setdescription] = useState<string>('');
+
+  const { execute } = useAction(createCategory, {
+    onSuccess: (data) => {
+      toast.success(`Catetory ${data.title} created!`);
+    },
+    onError: () => {
+      toast.error('Error create category :( ');
+    }
+  })
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -31,13 +40,11 @@ const CreateCategoryModal = () => {
   };
 
   const handelAddCategory = async () => {
-    await axios.post('/api/v1/category', {
+    execute({
       title,
       description,
       slug,
-    });
-    handleClose();
-    router.refresh();
+    })
   };
 
   const isModalOpen = isOpen && type === 'createCategory';

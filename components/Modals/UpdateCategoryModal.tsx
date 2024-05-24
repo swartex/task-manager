@@ -4,15 +4,21 @@ import { useModal } from '@/hooks/useModal';
 import { ChangeEvent, useState, useEffect } from 'react';
 import Input from '../ui/input';
 import { Button } from '../ui/button';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
+import { useAction } from '@/hooks/useAction';
+import { updateCategory } from '@/actions/updateCategory';
+import { toast } from 'sonner';
 
 const UpdateCategoryModal = () => {
-  const router = useRouter();
   const { isOpen, onClose, data, type } = useModal();
 
   const [title, setTitle] = useState<string>('');
   const [description, setdescription] = useState<string>('');
+  const { execute } = useAction(updateCategory, {
+    onSuccess: (data) => {
+      toast.success(`Category ${data.title} updated!`);
+    },
+    onError: () => toast.error('Error update category :( '),
+  });
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -29,13 +35,14 @@ const UpdateCategoryModal = () => {
   };
 
   const handelUpdateCategory = async () => {
-    await axios.patch('/api/v1/category', {
-      id: data.category?.id,
-      title,
-      description,
-    });
-    handleClose();
-    router.refresh();
+    if (data.category) {
+      execute({
+        id: data.category.id,
+        title,
+        description,
+      });
+      handleClose();
+    }
   };
 
   useEffect(() => {

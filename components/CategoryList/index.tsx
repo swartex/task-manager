@@ -12,9 +12,10 @@ import {
 import { Button } from '@/components/ui/button';
 import { Category } from '@prisma/client';
 import { useModal } from '@/hooks/useModal';
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
 import { PlusCircle } from 'lucide-react';
+import { useAction } from '@/hooks/useAction';
+import { deleteCategory } from '@/actions/deleteCategory';
+import { toast } from 'sonner';
 
 interface CategoryListProps {
   categories: (Category & {
@@ -26,15 +27,15 @@ interface CategoryListProps {
 
 export default function CategoryList({ categories }: CategoryListProps) {
   const { onOpen } = useModal();
-  const router = useRouter();
+  const { execute } = useAction(deleteCategory, {
+    onSuccess: (data) => {
+      toast.success(`Category ${data.title} remove`);
+    },
+    onError: (error) => toast.error(error),
+  })
 
   const handleDeleteCategory = async (id: string) => {
-    await axios.delete('/api/v1/category', {
-      data: {
-        id,
-      },
-    });
-    router.refresh();
+    execute({ id })
   };
 
   return (
@@ -55,7 +56,7 @@ export default function CategoryList({ categories }: CategoryListProps) {
             <TableHead>Description</TableHead>
             <TableHead>Slug</TableHead>
             <TableHead className="text-center">Count</TableHead>
-            <TableHead className="w-[200px]">Actions</TableHead>
+            <TableHead className="w-[200px] text-center">Actions</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>

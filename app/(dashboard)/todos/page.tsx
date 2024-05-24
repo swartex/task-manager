@@ -3,6 +3,9 @@ import prisma from '@/libs/prismadb';
 
 const TodosPage = async () => {
   const todos = await prisma.todo.findMany({
+    where: {
+      status: false,
+    },
     include: {
       category: true,
     },
