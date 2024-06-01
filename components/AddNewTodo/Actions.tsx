@@ -1,20 +1,24 @@
 import { FC, useState } from 'react';
 import { CalendarDays, Bell, Repeat } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger, PopoverClose } from '@/components/ui/popover';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
 import { format } from 'date-fns';
 import { cn } from '@/libs/utils';
 import Hint from '@/components/ui/Hint';
+import { TimePicker } from '@/components/ui/TimePicker';
 
 interface ActionsProps {
   onAddTodo?: () => void;
   disabled?: boolean;
 }
 
+const currentDate = new Date();
+
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
+  const [selectedTime, setSelectedTime ] = useState<Date>(currentDate);
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
@@ -24,7 +28,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
     // reset date and close calendar
     setSelectedDate(undefined);
     setCalendarOpen(false);
-  }
+  };
 
   return (
     <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
@@ -46,10 +50,14 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
           <strong className="block border-b pb-3 text-center text-lg">Due</strong>
           <Calendar
             mode="single"
-            selected={selectedDate ?? new Date()}
+            selected={selectedDate ?? currentDate}
+            // FIXME: need fix this sheet!
             onSelect={(newDate) => onSelectDate(newDate as Date)}
             className="border-b"
           />
+          <div className="border-t border-border p-3">
+            <TimePicker date={new Date()} setDate={(date) => setSelectedTime(date)} />
+          </div>
           <Button
             onClick={() => setCalendarOpen(false)}
             className="mt-4 w-full"
@@ -59,12 +67,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             Save
           </Button>
 
-          <Button
-            className="mt-4 w-full"
-            variant="outline"
-            size="sm"
-            onClick={handleCancel}
-          >
+          <Button className="mt-4 w-full" variant="outline" size="sm" onClick={handleCancel}>
             Clear date
           </Button>
         </PopoverContent>
