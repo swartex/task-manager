@@ -1,8 +1,8 @@
 'use client';
 import { TodoWithCategory } from '@/types/TodoWithCategory';
 
-import TodoItem from './TodoItem';
 import AddNewTodo from '@/components/AddNewTodo';
+import TodoItem from './TodoItem';
 
 interface TodoListProps {
   todos: TodoWithCategory[];

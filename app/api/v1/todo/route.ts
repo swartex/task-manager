@@ -53,10 +53,6 @@ export const PATCH = async (req: NextRequest) => {
   }
 };
 
-interface IDeleteParams {
-  todoId: string;
-}
-
 export const DELETE = async (req: NextRequest) => {
   const { todoId } = await req.json();
 

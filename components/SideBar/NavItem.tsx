@@ -1,32 +1,30 @@
 'use client';
 
-import { cn } from '@/libs/utils';
 import { Boxes, CheckCheck, Star, Sun } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
 import { FC } from 'react';
+import { cn } from '@/libs/utils';
 
 const iconMap = {
-  "default": null,
-  "complited": <CheckCheck className='w-3 h-3' />,
-  "favorites": <Star className='w-3 h-3' />,
-  "day": <Sun className='w-3 h-3' />,
-  "work": <Boxes className='w-3 h-3' />,
+  default: null,
+  complited: <CheckCheck className="h-3 w-3" />,
+  favorites: <Star className="h-3 w-3" />,
+  day: <Sun className="h-3 w-3" />,
+  work: <Boxes className="h-3 w-3" />,
 };
 
 type Marker = keyof typeof iconMap;
-
 
 interface NavItemProps {
   id: string; // example: id
   title: string;
   count?: number;
-  marker?: Marker
+  marker?: Marker;
 }
 
-const NavItem: FC<NavItemProps> = ({id, title, count, marker = 'default' }) => {
+const NavItem: FC<NavItemProps> = ({ id, title, count, marker = 'default' }) => {
   const params = useParams();
-
 
   // FIXME: need fix active element
   return (
@@ -37,17 +35,11 @@ const NavItem: FC<NavItemProps> = ({id, title, count, marker = 'default' }) => {
           'border-l-4 border-cyan-600 bg-blue-300/10 hover:border-cyan-500/80',
       )}
     >
-      <Link
-        href={`/category/${id}`}
-        key={id}
-        className={cn('flex items-center gap-3 px-6 py-3')}
-      >
+      <Link href={`/category/${id}`} key={id} className={cn('flex items-center gap-3 px-6 py-3')}>
         {iconMap[marker]}
         {title}
         {!!count && (
-          <span className="ml-auto text-[12px] font-semibold text-zinc-700">
-            {count}
-          </span>
+          <span className="ml-auto text-[12px] font-semibold text-zinc-700">{count}</span>
         )}
       </Link>
     </li>

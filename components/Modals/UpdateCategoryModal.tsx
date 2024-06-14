@@ -1,12 +1,12 @@
 'use client';
+import { ChangeEvent, useState, useEffect } from 'react';
+import { toast } from 'sonner';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useModal } from '@/hooks/useModal';
-import { ChangeEvent, useState, useEffect } from 'react';
-import Input from '../ui/input';
-import { Button } from '../ui/button';
 import { useAction } from '@/hooks/useAction';
 import { updateCategory } from '@/actions/updateCategory';
-import { toast } from 'sonner';
+import Input from '../ui/input';
+import { Button } from '../ui/button';
 
 const UpdateCategoryModal = () => {
   const { isOpen, onClose, data, type } = useModal();

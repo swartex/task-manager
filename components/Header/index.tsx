@@ -23,7 +23,7 @@ const Header = () => {
         <ul className="flex items-center gap-3">
           {navigation.map((item) => (
             <li key={item.link} className="text-sm">
-              <Link href={item.link} className="text-white tracking-wider hover:opacity-75">
+              <Link href={item.link} className="tracking-wider text-white hover:opacity-75">
                 {item.anchor}
               </Link>
             </li>

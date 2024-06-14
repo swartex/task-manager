@@ -1,5 +1,8 @@
 'use client';
 
+import { Category } from '@prisma/client';
+import { PlusCircle } from 'lucide-react';
+import { toast } from 'sonner';
 import {
   Table,
   TableBody,
@@ -10,12 +13,9 @@ import {
   TableRow,
 } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { Category } from '@prisma/client';
 import { useModal } from '@/hooks/useModal';
-import { PlusCircle } from 'lucide-react';
 import { useAction } from '@/hooks/useAction';
 import { deleteCategory } from '@/actions/deleteCategory';
-import { toast } from 'sonner';
 
 interface CategoryListProps {
   categories: (Category & {
@@ -32,10 +32,10 @@ export default function CategoryList({ categories }: CategoryListProps) {
       toast.success(`Category ${data.title} remove`);
     },
     onError: (error) => toast.error(error),
-  })
+  });
 
   const handleDeleteCategory = async (id: string) => {
-    execute({ id })
+    execute({ id });
   };
 
   return (

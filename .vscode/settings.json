@@ -4,7 +4,7 @@
   "prettier.singleQuote": false,
   "javascript.preferences.quoteStyle": "single",
   "typescript.preferences.quoteStyle": "single",
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.defaultFormatter": "stylelint.vscode-stylelint",
   "search.exclude": {
     "**/.yarn": true
   },
@@ -13,5 +13,14 @@
   },
   "files.exclude": {
     "**/.yarn": true
+  },
+  "[typescriptreact]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
   }
 }

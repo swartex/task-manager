@@ -1,5 +1,4 @@
 import TodoList from '@/components/TodosList';
-import TodoItem from '@/components/TodosList/TodoItem';
 import prisma from '@/libs/prismadb';
 
 interface IParams {
@@ -21,7 +20,5 @@ export default async function SingleCategoryPage({ params }: { params: IParams }
     ],
   });
 
-  return (
-    <TodoList todos={todos} />
-  );
+  return <TodoList todos={todos} />;
 }

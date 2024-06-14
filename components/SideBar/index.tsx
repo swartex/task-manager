@@ -22,7 +22,7 @@ const SideBar: FC = async () => {
     ],
   });
   return (
-    <aside className="w-[300px] border-r-2 border-slate-300/20 hidden sm:block bg-white">
+    <aside className="hidden w-[300px] border-r-2 border-slate-300/20 bg-white sm:block">
       <ul>
         {categories.map((category) => {
           return (
@@ -35,7 +35,7 @@ const SideBar: FC = async () => {
             />
           );
         })}
-        <NavItem id="complited" marker='complited' title="Complited"/>
+        <NavItem id="complited" marker="complited" title="Complited" />
       </ul>
 
       {/* <ActionButtons /> */}

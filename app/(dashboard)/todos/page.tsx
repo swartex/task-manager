@@ -16,9 +16,7 @@ const TodosPage = async () => {
     ],
   });
 
-  return (
-    <TodoList todos={todos} />
-  );
+  return <TodoList todos={todos} />;
 };
 
 export default TodosPage;

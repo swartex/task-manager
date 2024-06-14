@@ -1,10 +1,10 @@
 'use client';
 
-import { useModal } from '@/hooks/useModal';
 import { Category } from '@prisma/client';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useAction } from '@/hooks/useAction';
 import { toast } from 'sonner';
+import { useAction } from '@/hooks/useAction';
+import { useModal } from '@/hooks/useModal';
 import { updateTodo } from '@/actions/updateTodo';
 import {
   Select,
@@ -42,6 +42,7 @@ const UpdateTodoModal = () => {
   const handleClose = () => {
     setTitle('');
     setStatus(false);
+
     setSelectedCategory('');
     setdescription('');
     setDeadline(undefined);
