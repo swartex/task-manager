@@ -1,11 +1,9 @@
 'use client';
 
-import { useModal } from '@/hooks/useModal';
 import { Category } from '@prisma/client';
 import { ChangeEvent, useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Input from '../ui/input';
-import { Button } from '../ui/button';
+import { CheckCircle } from 'lucide-react';
+import { toast } from 'sonner';
 import {
   Select,
   SelectContent,
@@ -18,14 +16,14 @@ import {
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
 import { getCategories } from '@/actions/getCategory';
-import { CheckCircle } from 'lucide-react';
 import DatePicker from '@/components/ui/DatePicker';
 import { useAction } from '@/hooks/useAction';
 import { createTodo } from '@/actions/createTodo';
-import { toast } from 'sonner';
+import { useModal } from '@/hooks/useModal';
+import { Button } from '../ui/button';
+import Input from '../ui/input';
 
 const CreateTodoModal = () => {
-  const router = useRouter();
   const { isOpen, onClose, type } = useModal();
   const [title, setTitle] = useState<string>('');
   const [description, setdescription] = useState<string>('');
@@ -50,14 +48,14 @@ const CreateTodoModal = () => {
     setdescription(e.target.value);
   };
 
-  function handleClose () {
+  function handleClose() {
     setTitle('');
     setStatus(false);
     setSelectedCategory('');
     setdescription('');
     setDeadline(undefined);
     onClose();
-  };
+  }
 
   const handelAddCategory = () => {
     // await axios.post('/api/v1/todo', {

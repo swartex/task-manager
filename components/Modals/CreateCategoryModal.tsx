@@ -1,13 +1,13 @@
 'use client';
+import { ChangeEvent, useState } from 'react';
+import { CheckCircle } from 'lucide-react';
+import { toast } from 'sonner';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useModal } from '@/hooks/useModal';
-import { ChangeEvent, useState } from 'react';
-import Input from '../ui/input';
-import { Button } from '../ui/button';
-import { CheckCircle } from 'lucide-react';
 import { useAction } from '@/hooks/useAction';
 import { createCategory } from '@/actions/createCategory';
-import { toast } from 'sonner';
+import Input from '../ui/input';
+import { Button } from '../ui/button';
 
 const CreateCategoryModal = () => {
   const { isOpen, onClose, type } = useModal();
@@ -21,8 +21,8 @@ const CreateCategoryModal = () => {
     },
     onError: () => {
       toast.error('Error create category :( ');
-    }
-  })
+    },
+  });
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);
@@ -44,7 +44,7 @@ const CreateCategoryModal = () => {
       title,
       description,
       slug,
-    })
+    });
   };
 
   const isModalOpen = isOpen && type === 'createCategory';
@@ -79,7 +79,7 @@ const CreateCategoryModal = () => {
           </div>
           <div className="flex flex-row justify-between">
             <Button
-              disabled={!title}
+              disabled={!!title}
               variant="default"
               onClick={handelAddCategory}
               className="flex items-center gap-2"

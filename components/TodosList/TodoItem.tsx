@@ -1,16 +1,16 @@
 'use client';
 
 import { FC, useState, useRef, useEffect, KeyboardEvent } from 'react';
-import { Checkbox } from '@/components/ui/checkbox';
-import { TodoWithCategory } from '@/types/TodoWithCategory';
 import { toast } from 'sonner';
 import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
-import { useModal } from '@/hooks/useModal';
 import { format } from 'date-fns';
+import { Todo } from '@prisma/client';
+import { Checkbox } from '@/components/ui/checkbox';
+import { TodoWithCategory } from '@/types/TodoWithCategory';
+import { useModal } from '@/hooks/useModal';
 import Tag from '@/components/ui/Tag';
 import Input from '@/components/ui/input';
 import { cn } from '@/libs/utils';
-import { Todo } from '@prisma/client';
 import { useAction } from '@/hooks/useAction';
 import { deleteTodo } from '@/actions/deleteTodo';
 import { updateTodo } from '@/actions/updateTodo';
@@ -48,15 +48,15 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
     if (isEdit && editInputRef.current) {
       editInputRef.current.focus();
     }
-  }, [editInputRef.current, isEdit]);
+  }, [isEdit]);
 
   const handleKeyDown = async (e: KeyboardEvent<HTMLInputElement>, todo: Todo) => {
     if (e.key === 'Enter') {
       if (newTitle !== todo.title) {
         executeUpdate({
           id: todo.id,
-          title: newTitle
-        })
+          title: newTitle,
+        });
       }
       setIsEdit(false);
       setNewTitle(todo.title);
@@ -70,7 +70,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
     executeUpdate({
       id: todoId,
       status: newStatus,
-    })
+    });
   };
 
   return (
@@ -79,9 +79,10 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         <Checkbox
           onCheckedChange={(status) => handleCheckComplite(todo.id, !!status)}
           checked={todo.status}
-        />{' '}
+        />
         {!isEdit && (
           <span
+            role="button"
             onClick={() => setIsEdit(true)}
             className={cn('font-medium', todo.status && 'text-muted-foreground line-through')}
           >

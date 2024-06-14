@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 import { CalendarDays, Bell, Repeat } from 'lucide-react';
+import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { format } from 'date-fns';
 import { cn } from '@/libs/utils';
 import Hint from '@/components/ui/Hint';
 import { TimePicker } from '@/components/ui/TimePicker';
@@ -18,7 +18,8 @@ const currentDate = new Date();
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [selectedTime, setSelectedTime ] = useState<Date>(currentDate);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [selectedTime, setSelectedTime] = useState<Date>(currentDate);
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
@@ -56,7 +57,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             className="border-b"
           />
           <div className="border-t border-border p-3">
-            <TimePicker date={new Date()} setDate={(date) => setSelectedTime(date)} />
+            <TimePicker date={new Date()} setDate={(date) => setSelectedTime(date as Date)} />
           </div>
           <Button
             onClick={() => setCalendarOpen(false)}
