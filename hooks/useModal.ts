@@ -1,6 +1,6 @@
 import { create } from 'zustand';
-import { type ModalType } from '@/types/modalTypes';
 import { Category, Todo } from '@prisma/client';
+import { type ModalType } from '@/types/modalTypes';
 
 interface ModalData {
   category?: Category;

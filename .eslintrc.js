@@ -38,6 +38,7 @@ const config = {
     'prettier/prettier': ['error', { printWidth: 100 }],
     'jsx-a11y/click-events-have-key-events': 'off',
     'jsx-a11y/interactive-supports-focus': 'off',
+    '@typescript-eslint/no-explicit-any': 'off',
   },
 };
 
