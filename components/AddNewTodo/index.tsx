@@ -2,7 +2,7 @@
 
 import { ChangeEvent, FC, useState, KeyboardEvent } from 'react';
 import { Plus } from 'lucide-react';
-import { useParams, useRouter } from 'next/navigation';
+import { useParams } from 'next/navigation';
 import { toast } from 'sonner';
 import { useAction } from '@/hooks/useAction';
 import { createTodo } from '@/actions/createTodo';
@@ -14,7 +14,7 @@ const AddNewTodo: FC = () => {
   const [focused, setFocused] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
   const params = useParams();
-  const router = useRouter();
+
   const { execute } = useAction(createTodo, {
     onSuccess: (data) => {
       toast.success(`Todo ${data.title} created!`);
@@ -23,7 +23,7 @@ const AddNewTodo: FC = () => {
     },
   });
 
-  if (!params?.categoryId) return null;
+  if (!params.slug) return null;
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewTodo(e.target.value.trim());
@@ -33,11 +33,9 @@ const AddNewTodo: FC = () => {
     if (newTodo === '') return;
     execute({
       title: newTodo,
-      category_id: params.categoryId as string,
+      category_id: params.categoryId as string, // FIXME: need select category by slug
       status: false,
     });
-
-    router.refresh();
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {

@@ -2,13 +2,16 @@ import TodoList from '@/components/TodosList';
 import prisma from '@/libs/prismadb';
 
 interface IParams {
-  categoryId: string;
+  // categoryId: string;
+  slug: string;
 }
-export default async function SingleCategoryPage({ params }: { params: IParams }) {
+export default async function CategoryPage({ params }: { params: IParams }) {
   const todos = await prisma.todo.findMany({
     where: {
-      category_id: params.categoryId,
       status: false,
+      category: {
+        slug: params.slug,
+      },
     },
     include: {
       category: true,

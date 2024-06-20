@@ -18,6 +18,7 @@ const CreateCategoryModal = () => {
   const { execute } = useAction(createCategory, {
     onSuccess: (data) => {
       toast.success(`Catetory ${data.title} created!`);
+      handleClose();
     },
     onError: () => {
       toast.error('Error create category :( ');
@@ -39,7 +40,7 @@ const CreateCategoryModal = () => {
     onClose();
   };
 
-  const handelAddCategory = async () => {
+  const handelAddCategory = () => {
     execute({
       title,
       description,
@@ -79,7 +80,7 @@ const CreateCategoryModal = () => {
           </div>
           <div className="flex flex-row justify-between">
             <Button
-              disabled={!!title}
+              disabled={!title}
               variant="default"
               onClick={handelAddCategory}
               className="flex items-center gap-2"

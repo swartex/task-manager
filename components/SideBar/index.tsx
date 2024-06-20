@@ -22,20 +22,20 @@ const SideBar: FC = async () => {
     ],
   });
   return (
-    <aside className="hidden w-[300px] border-r-2 border-slate-300/20 bg-white sm:block">
+    <aside className="hidden w-[230px] min-w-[230px] border-r-2 border-slate-300/20 bg-white sm:block">
       <ul>
         {categories.map((category) => {
           return (
             <NavItem
               key={category.id}
-              id={category.id}
+              slug={category.slug}
               title={category.title}
               count={category._count.Todos}
               // marker='work' // TODO: need fix this
             />
           );
         })}
-        <NavItem id="complited" marker="complited" title="Complited" />
+        <NavItem slug="complited" marker="complited" title="Complited" />
       </ul>
 
       {/* <ActionButtons /> */}

@@ -1,5 +1,4 @@
 'use server';
-prisma.todo.create
 import { revalidatePath } from 'next/cache';
 
 import prisma from '@/libs/prismadb';
@@ -13,7 +12,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
 
   try {
     createdTodo = await prisma.todo.create({
-      data: {...data}
+      data: { ...data },
     });
   } catch (error) {
     return {
