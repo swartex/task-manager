@@ -6,7 +6,7 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/libs/utils';
 import Hint from '@/components/ui/Hint';
-import { TimePicker } from '@/components/ui/TimePicker';
+import TimePicker from '@/components/ui/TimePicker';
 
 interface ActionsProps {
   onAddTodo?: () => void;
@@ -18,8 +18,7 @@ const currentDate = new Date();
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [selectedTime, setSelectedTime] = useState<Date>(currentDate);
+  const [time, setTime] = useState<string>('');
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
@@ -31,6 +30,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
     setCalendarOpen(false);
   };
 
+  console.log({ time });
   return (
     <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
       <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -57,7 +57,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             className="border-b"
           />
           <div className="border-t border-border p-3">
-            <TimePicker date={new Date()} setDate={(date) => setSelectedTime(date as Date)} />
+            <TimePicker time={time} onTimeChange={setTime} />
           </div>
           <Button
             onClick={() => setCalendarOpen(false)}
