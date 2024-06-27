@@ -28,7 +28,7 @@ const SideBar: FC = async () => {
           return (
             <NavItem
               key={category.id}
-              slug={category.slug}
+              slug={category.slug as string}
               title={category.title}
               count={category._count.Todos}
               // marker='work' // TODO: need fix this

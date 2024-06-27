@@ -8,12 +8,14 @@ import { useAction } from '@/hooks/useAction';
 import { createTodo } from '@/actions/createTodo';
 import { cn } from '@/libs/utils';
 
+import { getCategoryBySlug } from '@/actions/getCategoryBySlug';
 import Actions from './Actions';
 
 const AddNewTodo: FC = () => {
   const [newTodo, setNewTodo] = useState<string>('');
   const [focused, setFocused] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
+  const [deadline, setDeadline] = useState<number>(0);
   const params = useParams();
 
   const { execute } = useAction(createTodo, {
@@ -32,11 +34,17 @@ const AddNewTodo: FC = () => {
 
   const handleAdd = async () => {
     if (newTodo === '') return;
-    execute({
-      title: newTodo,
-      category_id: params.categoryId as string, // FIXME: need select category by slug
-      status: false,
-    });
+
+    const category = await getCategoryBySlug(params.slug as string);
+
+    if (category) {
+      execute({
+        title: newTodo,
+        category_id: category.id,
+        status: false,
+        deadline: new Date(deadline),
+      });
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
@@ -66,7 +74,7 @@ const AddNewTodo: FC = () => {
           disabled={disabled}
         />
       </div>
-      <Actions disabled={newTodo === ''} onAddTodo={handleAdd} />
+      <Actions onTimeChange={setDeadline} disabled={newTodo === ''} onAddTodo={handleAdd} />
     </div>
   );
 };

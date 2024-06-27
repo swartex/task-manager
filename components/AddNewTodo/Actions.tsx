@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { CalendarDays, Bell, Repeat } from 'lucide-react';
 import { format } from 'date-fns';
 import { Button } from '@/components/ui/button';
@@ -7,16 +7,18 @@ import { Calendar } from '@/components/ui/calendar';
 import { cn } from '@/libs/utils';
 import Hint from '@/components/ui/Hint';
 import TimePicker from '@/components/ui/TimePicker';
+import { parseDateTime } from '@/libs/utils';
 
 interface ActionsProps {
   onAddTodo?: () => void;
+  onTimeChange: (unixTime: number) => void;
   disabled?: boolean;
 }
 
 const currentDate = new Date();
 
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
-  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
   const [time, setTime] = useState<string>('');
 
@@ -26,11 +28,14 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
 
   const handleCancel = () => {
     // reset date and close calendar
-    setSelectedDate(undefined);
+    setTime('');
     setCalendarOpen(false);
   };
 
-  console.log({ time });
+  // useEffect(() => {
+  //   console.log(parseDateTime(selectedDate, time));
+  // }, [selectedDate, time]);
+
   return (
     <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
       <Popover open={calendarOpen} onOpenChange={setCalendarOpen}>
@@ -44,7 +49,11 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             <Hint title="Due date">
               <CalendarDays size={16} className="opacity-75" />
             </Hint>
-            {selectedDate && format(selectedDate, 'PP')}
+            {selectedDate && (
+              <>
+                {format(selectedDate, 'PP')} time: {time}
+              </>
+            )}
           </button>
         </PopoverTrigger>
         <PopoverContent className="w-max">
@@ -64,6 +73,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             className="mt-4 w-full"
             variant="default"
             size="sm"
+            disabled={!selectedDate || !time}
           >
             Save
           </Button>
