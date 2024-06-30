@@ -1,0 +1,81 @@
+{
+	"$schema": "https://biomejs.dev/schemas/1.8.3/schema.json",
+	"formatter": {
+		"enabled": true,
+		"formatWithErrors": false,
+		"indentStyle": "space",
+		"indentWidth": 2,
+		"lineEnding": "lf",
+		"lineWidth": 100,
+		"attributePosition": "auto"
+	},
+	"organizeImports": { "enabled": true },
+	"linter": {
+		"enabled": true,
+		"rules": {
+			"recommended": false,
+			"a11y": {
+				"noAccessKey": "error",
+				"noAriaUnsupportedElements": "error",
+				"noAutofocus": "error",
+				"noDistractingElements": "error",
+				"noHeaderScope": "error",
+				"noInteractiveElementToNoninteractiveRole": "error",
+				"noNoninteractiveElementToInteractiveRole": "error",
+				"noNoninteractiveTabindex": "error",
+				"noPositiveTabindex": "error",
+				"noRedundantAlt": "error",
+				"noRedundantRoles": "error",
+				"useAltText": "error",
+				"useAnchorContent": "error",
+				"useAriaActivedescendantWithTabindex": "error",
+				"useAriaPropsForRole": "error",
+				"useHeadingContent": "error",
+				"useHtmlLang": "error",
+				"useIframeTitle": "error",
+				"useKeyWithClickEvents": "off",
+				"useKeyWithMouseEvents": "error",
+				"useMediaCaption": "error",
+				"useValidAnchor": "error",
+				"useValidAriaProps": "error",
+				"useValidAriaRole": "error",
+				"useValidAriaValues": "error"
+			},
+			"complexity": {
+				"noBannedTypes": "error",
+				"noUselessThisAlias": "error",
+				"noUselessTypeConstraint": "error",
+				"useArrowFunction": "off"
+			},
+			"correctness": {
+				"noPrecisionLoss": "error",
+				"noUnusedVariables": "error",
+				"useArrayLiterals": "off"
+			},
+			"style": {
+				"noNamespace": "error",
+				"useAsConstAssertion": "error",
+				"useBlockStatements": "off"
+			},
+			"suspicious": {
+				"noExplicitAny": "off",
+				"noExtraNonNullAssertion": "error",
+				"noMisleadingInstantiator": "error",
+				"noUnsafeDeclarationMerging": "error"
+			}
+		}
+	},
+	"javascript": {
+		"formatter": {
+			"jsxQuoteStyle": "double",
+			"quoteProperties": "asNeeded",
+			"trailingCommas": "all",
+			"semicolons": "always",
+			"arrowParentheses": "always",
+			"bracketSpacing": true,
+			"bracketSameLine": false,
+			"quoteStyle": "single",
+			"attributePosition": "auto"
+		}
+	}
+}
