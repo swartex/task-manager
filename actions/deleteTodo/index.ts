@@ -2,11 +2,11 @@
 
 import { revalidatePath } from 'next/cache';
 
-import prisma from '@/libs/prismadb';
 import { createAction } from '@/libs/createAction';
+import prisma from '@/libs/prismadb';
 
 import { DeleteTodo } from './schema';
-import { InputType, ReturnType } from './types';
+import { type InputType, type ReturnType } from './types';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { id } = data;

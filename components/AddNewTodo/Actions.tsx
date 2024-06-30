@@ -1,13 +1,14 @@
-import { FC, useEffect, useState } from 'react';
-import { CalendarDays, Bell, Repeat } from 'lucide-react';
 import { format } from 'date-fns';
+import { CalendarDays, Bell, Repeat } from 'lucide-react';
+import { type FC, useState } from 'react';
+
 import { Button } from '@/components/ui/button';
-import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { Calendar } from '@/components/ui/calendar';
-import { cn } from '@/libs/utils';
 import Hint from '@/components/ui/Hint';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import TimePicker from '@/components/ui/TimePicker';
-import { parseDateTime } from '@/libs/utils';
+import { cn } from '@/libs/utils';
+// import { parseDateTime } from '@/libs/utils';
 
 interface ActionsProps {
   onAddTodo?: () => void;

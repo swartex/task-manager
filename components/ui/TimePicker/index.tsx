@@ -1,7 +1,8 @@
-import { ChangeEvent, FC } from 'react';
 import { CircleX } from 'lucide-react';
-import Input from '../input';
+import { type ChangeEvent, type FC } from 'react';
+
 import { Button } from '../button';
+import Input from '../input';
 
 type TimePickerProps = {
   onTimeChange: (time: string) => void;

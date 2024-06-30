@@ -1,6 +1,7 @@
 'use client';
 
-import { FC, ReactNode } from 'react';
+import { type FC, type ReactNode } from 'react';
+
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 interface HintProps {

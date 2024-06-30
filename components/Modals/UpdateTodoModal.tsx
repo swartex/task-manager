@@ -1,11 +1,15 @@
 'use client';
 
-import { Category } from '@prisma/client';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { type Category } from '@prisma/client';
+import { type ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'sonner';
-import { useAction } from '@/hooks/useAction';
-import { useModal } from '@/hooks/useModal';
+
+import { getCategories } from '@/actions/getCategory';
 import { updateTodo } from '@/actions/updateTodo';
+import { Button } from '@/components/ui/button';
+import DatePicker from '@/components/ui/DatePicker';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import Input from '@/components/ui/input';
 import {
   Select,
   SelectContent,
@@ -15,12 +19,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import Input from '@/components/ui/input';
-import { Button } from '@/components/ui/button';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
-import { getCategories } from '@/actions/getCategory';
-import DatePicker from '@/components/ui/DatePicker';
+import { useAction } from '@/hooks/useAction';
+import { useModal } from '@/hooks/useModal';
 
 const UpdateTodoModal = () => {
   const { isOpen, onClose, type, data } = useModal();

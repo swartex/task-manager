@@ -1,4 +1,5 @@
-import { FC, ReactNode } from 'react';
+import { type FC, type ReactNode } from 'react';
+
 import { cn } from '@/libs/utils';
 
 interface ContainerProps {

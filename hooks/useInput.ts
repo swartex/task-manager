@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from 'react';
+import { type ChangeEvent, useState } from 'react';
 
 export default function useInput(initialValue?: any) {
   const [value, setValue] = useState<any>(initialValue);

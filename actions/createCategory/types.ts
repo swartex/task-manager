@@ -1,9 +1,9 @@
-import zod from "zod";
-import { Category } from "@prisma/client";
+import { type Category } from '@prisma/client';
+import type zod from 'zod';
 
-import { ActionState } from "@/libs/createAction";
+import { type ActionState } from '@/libs/createAction';
 
-import { CreateCategory } from "./schema";
+import { type CreateCategory } from './schema';
 
 export type InputType = zod.infer<typeof CreateCategory>;
 export type ReturnType = ActionState<InputType, Category>;

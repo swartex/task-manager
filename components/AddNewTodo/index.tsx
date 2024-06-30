@@ -1,14 +1,15 @@
 'use client';
 
-import { ChangeEvent, FC, useState, KeyboardEvent } from 'react';
 import { Plus } from 'lucide-react';
 import { useParams } from 'next/navigation';
+import { type ChangeEvent, type FC, useState, type KeyboardEvent } from 'react';
 import { toast } from 'sonner';
-import { useAction } from '@/hooks/useAction';
+
 import { createTodo } from '@/actions/createTodo';
+import { getCategoryBySlug } from '@/actions/getCategoryBySlug';
+import { useAction } from '@/hooks/useAction';
 import { cn } from '@/libs/utils';
 
-import { getCategoryBySlug } from '@/actions/getCategoryBySlug';
 import Actions from './Actions';
 
 const AddNewTodo: FC = () => {

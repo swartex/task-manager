@@ -1,9 +1,9 @@
-import zod from "zod";
-import { Todo } from "@prisma/client";
+import { type Todo } from '@prisma/client';
+import type zod from 'zod';
 
-import { ActionState } from "@/libs/createAction";
+import { type ActionState } from '@/libs/createAction';
 
-import { UpdateTodo } from "./schema";
+import { type UpdateTodo } from './schema';
 
 export type InputType = zod.infer<typeof UpdateTodo>;
 export type ReturnType = ActionState<InputType, Todo>;

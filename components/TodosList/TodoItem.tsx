@@ -1,19 +1,20 @@
 'use client';
 
-import { FC, useState, useRef, useEffect, KeyboardEvent } from 'react';
-import { toast } from 'sonner';
-import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
+import { type Todo } from '@prisma/client';
 import { format } from 'date-fns';
-import { Todo } from '@prisma/client';
-import { Checkbox } from '@/components/ui/checkbox';
-import { TodoWithCategory } from '@/types/TodoWithCategory';
-import { useModal } from '@/hooks/useModal';
-import Tag from '@/components/ui/Tag';
-import Input from '@/components/ui/input';
-import { cn } from '@/libs/utils';
-import { useAction } from '@/hooks/useAction';
+import { CalendarClock, DeleteIcon, Edit3, Tags } from 'lucide-react';
+import { type FC, useState, useRef, useEffect, type KeyboardEvent } from 'react';
+import { toast } from 'sonner';
+
 import { deleteTodo } from '@/actions/deleteTodo';
 import { updateTodo } from '@/actions/updateTodo';
+import { Checkbox } from '@/components/ui/checkbox';
+import Input from '@/components/ui/input';
+import Tag from '@/components/ui/Tag';
+import { useAction } from '@/hooks/useAction';
+import { useModal } from '@/hooks/useModal';
+import { cn } from '@/libs/utils';
+import { type TodoWithCategory } from '@/types/TodoWithCategory';
 
 interface TodoItemProps {
   todo: TodoWithCategory;
