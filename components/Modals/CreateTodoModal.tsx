@@ -1,9 +1,14 @@
 'use client';
 
-import { Category } from '@prisma/client';
-import { ChangeEvent, useEffect, useState } from 'react';
+import { type Category } from '@prisma/client';
 import { CheckCircle } from 'lucide-react';
+import { type ChangeEvent, useEffect, useState } from 'react';
 import { toast } from 'sonner';
+
+import { createTodo } from '@/actions/createTodo';
+import { getCategories } from '@/actions/getCategory';
+import DatePicker from '@/components/ui/DatePicker';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import {
   Select,
   SelectContent,
@@ -13,13 +18,10 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { Switch } from '@/components/ui/switch';
-import { getCategories } from '@/actions/getCategory';
-import DatePicker from '@/components/ui/DatePicker';
 import { useAction } from '@/hooks/useAction';
-import { createTodo } from '@/actions/createTodo';
 import { useModal } from '@/hooks/useModal';
+
 import { Button } from '../ui/button';
 import Input from '../ui/input';
 

@@ -3,7 +3,8 @@
 import { Boxes, CheckCheck, Star, Sun } from 'lucide-react';
 import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
-import { FC } from 'react';
+import type { FC } from 'react';
+
 import { cn } from '@/libs/utils';
 
 const iconMap = {

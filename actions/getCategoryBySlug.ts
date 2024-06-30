@@ -1,5 +1,6 @@
 'use server';
 import { Category } from '@prisma/client';
+
 import prisma from '@/libs/prismadb';
 
 /**

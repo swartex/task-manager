@@ -1,8 +1,11 @@
 'use client';
 
-import { Category } from '@prisma/client';
+import { type Category } from '@prisma/client';
 import { PlusCircle } from 'lucide-react';
 import { toast } from 'sonner';
+
+import { deleteCategory } from '@/actions/deleteCategory';
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
@@ -12,10 +15,8 @@ import {
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
-import { Button } from '@/components/ui/button';
-import { useModal } from '@/hooks/useModal';
 import { useAction } from '@/hooks/useAction';
-import { deleteCategory } from '@/actions/deleteCategory';
+import { useModal } from '@/hooks/useModal';
 
 interface CategoryListProps {
   categories: (Category & {

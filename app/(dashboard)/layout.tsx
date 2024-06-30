@@ -1,7 +1,8 @@
-import { FC, PropsWithChildren } from 'react';
-import Container from '@/components/ui/Container';
-import SideBar from '@/components/SideBar';
+import { type FC, type PropsWithChildren } from 'react';
+
 import Header from '@/components/Header';
+import SideBar from '@/components/SideBar';
+import Container from '@/components/ui/Container';
 
 const DashboardLayout: FC<PropsWithChildren> = ({ children }) => {
   return (

@@ -1,13 +1,15 @@
 'use client';
-import { ChangeEvent, useState } from 'react';
 import { CheckCircle } from 'lucide-react';
+import { type ChangeEvent, useState } from 'react';
 import { toast } from 'sonner';
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
-import { useModal } from '@/hooks/useModal';
-import { useAction } from '@/hooks/useAction';
+
 import { createCategory } from '@/actions/createCategory';
-import Input from '../ui/input';
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
+import { useAction } from '@/hooks/useAction';
+import { useModal } from '@/hooks/useModal';
+
 import { Button } from '../ui/button';
+import Input from '../ui/input';
 
 const CreateCategoryModal = () => {
   const { isOpen, onClose, type } = useModal();

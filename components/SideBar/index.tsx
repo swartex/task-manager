@@ -1,5 +1,7 @@
-import { FC } from 'react';
+import { type FC } from 'react';
+
 import prisma from '@/libs/prismadb';
+
 import NavItem from './NavItem';
 
 const SideBar: FC = async () => {
