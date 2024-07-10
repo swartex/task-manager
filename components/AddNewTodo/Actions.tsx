@@ -8,10 +8,11 @@ import Hint from '@/components/ui/Hint';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import TimePicker from '@/components/ui/TimePicker';
 import { cn } from '@/libs/utils';
+import type Time from '@/types/Time';
 // import { parseDateTime } from '@/libs/utils';
 
 interface ActionsProps {
-  onAddTodo?: () => void;
+  onAddTodo: () => void;
   onTimeChange: (unixTime: number) => void;
   disabled?: boolean;
 }
@@ -19,23 +20,34 @@ interface ActionsProps {
 const currentDate = new Date();
 
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
-  const [selectedDate, setSelectedDate] = useState<Date>(() => new Date());
+  const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [time, setTime] = useState<string>('');
+  const [time, setTime] = useState<Time>(undefined);
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);
   };
 
-  const handleCancel = () => {
-    // reset date and close calendar
-    setTime('');
+  const handleReset = () => {
+    setTime(undefined);
+    setSelectedDate(undefined);
     setCalendarOpen(false);
   };
 
-  // useEffect(() => {
-  //   console.log(parseDateTime(selectedDate, time));
-  // }, [selectedDate, time]);
+  const handleSave = () => {
+    setCalendarOpen(false);
+  };
+
+  const handleAddTodo = () => {
+    onAddTodo();
+    handleReset();
+  };
+
+  const handleSelectDate = (newDate: Date | undefined) => {
+    if (!newDate) return;
+
+    onSelectDate(newDate);
+  };
 
   return (
     <div className="flex h-10 items-center gap-3 bg-[#e1dfdd]/40 px-4 py-2 text-xs text-[#292827]">
@@ -62,15 +74,14 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
           <Calendar
             mode="single"
             selected={selectedDate ?? currentDate}
-            // FIXME: need fix this sheet!
-            onSelect={(newDate) => onSelectDate(newDate as Date)}
+            onSelect={handleSelectDate}
             className="border-b"
           />
           <div className="border-t border-border p-3">
             <TimePicker time={time} onTimeChange={setTime} />
           </div>
           <Button
-            onClick={() => setCalendarOpen(false)}
+            onClick={handleSave}
             className="mt-4 w-full"
             variant="default"
             size="sm"
@@ -79,7 +90,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
             Save
           </Button>
 
-          <Button className="mt-4 w-full" variant="outline" size="sm" onClick={handleCancel}>
+          <Button className="mt-4 w-full" variant="outline" size="sm" onClick={handleReset}>
             Clear date
           </Button>
         </PopoverContent>
@@ -99,7 +110,7 @@ const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
         className="ml-auto h-7 rounded-none disabled:hover:cursor-default"
         variant="outline"
         size="sm"
-        onClick={onAddTodo}
+        onClick={handleAddTodo}
       >
         Add
       </Button>
