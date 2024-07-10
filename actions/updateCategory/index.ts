@@ -2,11 +2,11 @@
 
 import { revalidatePath } from 'next/cache';
 
-import prisma from '@/libs/prismadb';
 import { createAction } from '@/libs/createAction';
+import prisma from '@/libs/prismadb';
 
 import { UpdateCategory } from './schema';
-import { InputType, ReturnType } from './types';
+import { type InputType, type ReturnType } from './types';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   let updatedCategory;
@@ -15,7 +15,7 @@ const handler = async (data: InputType): Promise<ReturnType> => {
   try {
     updatedCategory = await prisma.category.update({
       where: { id },
-      data: { ...rest }
+      data: { ...rest },
     });
   } catch (error) {
     return {

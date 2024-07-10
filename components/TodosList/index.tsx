@@ -1,7 +1,7 @@
 'use client';
-import { TodoWithCategory } from '@/types/TodoWithCategory';
-
 import AddNewTodo from '@/components/AddNewTodo';
+import { type TodoWithCategory } from '@/types/TodoWithCategory';
+
 import TodoItem from './TodoItem';
 
 interface TodoListProps {

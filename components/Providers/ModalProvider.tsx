@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
+
 import CreateCategoryModal from '../Modals/CreateCategoryModal';
 import CreateTodoModal from '../Modals/CreateTodoModal';
 import UpdateCategoryModal from '../Modals/UpdateCategoryModal';

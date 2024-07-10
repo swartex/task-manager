@@ -1,11 +1,11 @@
 'use server';
 import { revalidatePath } from 'next/cache';
 
-import prisma from '@/libs/prismadb';
 import { createAction } from '@/libs/createAction';
+import prisma from '@/libs/prismadb';
 
 import { CreateTodo } from './schema';
-import { InputType, ReturnType } from './types';
+import { type InputType, type ReturnType } from './types';
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   let createdTodo;

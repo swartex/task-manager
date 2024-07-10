@@ -1,4 +1,5 @@
-import { NextResponse, NextRequest } from 'next/server';
+import { NextResponse, type NextRequest } from 'next/server';
+
 import prismadb from '@/libs/prismadb';
 
 export const GET = async () => {
