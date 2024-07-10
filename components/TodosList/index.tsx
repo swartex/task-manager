@@ -1,5 +1,6 @@
 'use client';
 import AddNewTodo from '@/components/AddNewTodo';
+import EmptyState from '@/components/ui/EmptyState';
 import { type TodoWithCategory } from '@/types/TodoWithCategory';
 
 import TodoItem from './TodoItem';
@@ -19,7 +20,7 @@ export default function TodoList({ todos }: TodoListProps) {
           ))}
         </div>
       ) : (
-        <p className="py-7 text-lg font-semibold text-muted-foreground">No todos</p>
+        <EmptyState text="No todos" />
       )}
     </>
   );

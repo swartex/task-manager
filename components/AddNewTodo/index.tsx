@@ -21,7 +21,7 @@ const AddNewTodo: FC = () => {
 
   const { execute } = useAction(createTodo, {
     onSuccess: (data) => {
-      toast.success(`Todo ${data.title} created!`);
+      toast.success(`Todo "${data.title}" created!`);
       setNewTodo('');
       setDisabled(false);
     },
@@ -34,7 +34,7 @@ const AddNewTodo: FC = () => {
   };
 
   const handleAdd = async () => {
-    if (newTodo === '') return;
+    if (!newTodo) return;
 
     const category = await getCategoryBySlug(params.slug as string);
 
@@ -75,7 +75,7 @@ const AddNewTodo: FC = () => {
           disabled={disabled}
         />
       </div>
-      <Actions onTimeChange={setDeadline} disabled={newTodo === ''} onAddTodo={handleAdd} />
+      <Actions onTimeChange={setDeadline} disabled={!newTodo} onAddTodo={handleAdd} />
     </div>
   );
 };
