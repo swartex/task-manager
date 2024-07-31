@@ -127,9 +127,7 @@ const TodoItem: FC<TodoItemProps> = ({ todo }) => {
         {todo.deadline && (
           <>
             <CalendarClock size={12} />{' '}
-            <span className="mr-4">
-              {todo.deadline && format(new Date(todo.deadline), 'd MMM yyyy, HH:mm')}
-            </span>
+            <span className="mr-4">{format(new Date(todo.deadline), 'd MMM yyyy, HH:mm')}</span>
           </>
         )}
         <div className="flex items-center gap-2">

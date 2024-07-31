@@ -22,7 +22,7 @@ interface DatePickerProps {
   className?: string;
 }
 
-const DatePicker: FC<DatePickerProps> = ({ onDateChange, className, defaultDate }) => {
+const DatePicker: FC<DatePickerProps> = ({ onDateChange, className, defaultDate = Date.now() }) => {
   const [date, setDate] = useState<Date | undefined>(defaultDate);
 
   return (
