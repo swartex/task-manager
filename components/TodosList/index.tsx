@@ -16,7 +16,7 @@ export default function TodoList({ todos }: TodoListProps) {
       {todos.length > 0 ? (
         <div className="flex flex-col gap-2">
           {todos.map((todo) => (
-            <TodoItem key={todo.id} todo={todo} />
+            <TodoItem key={todo.id}    todo={todo} />
           ))}
         </div>
       ) : (

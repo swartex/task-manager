@@ -6,11 +6,13 @@ interface IParams {
   slug: string;
 }
 export default async function CategoryPage({ params }: { params: IParams }) {
+  const { slug } = await params;
+
   const todos = await prisma.todo.findMany({
     where: {
       status: false,
       category: {
-        slug: params.slug,
+        slug: slug,
       },
     },
     include: {

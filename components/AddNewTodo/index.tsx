@@ -57,7 +57,7 @@ const AddNewTodo: FC = () => {
   return (
     <div
       className={cn(
-        'mb-4 overflow-hidden rounded bg-white shadow transition-all',
+        'mb-4 overflow-hidden rounded bg-white shadow-sm transition-all',
         focused && 'shadow-blue-600',
       )}
     >
@@ -65,7 +65,7 @@ const AddNewTodo: FC = () => {
         <Plus size={16} className={cn('text-blue-600 transition-all', focused && 'text-black')} />
         <input
           type="text"
-          className="h-10 w-full bg-transparent p-4 text-sm font-normal outline-none placeholder:text-blue-600 focus-within:outline-none focus:outline-none focus:placeholder:text-black active:outline-none disabled:text-muted"
+          className="h-10 w-full bg-transparent p-4 text-sm font-normal outline-hidden placeholder:text-blue-600 focus-within:outline-hidden focus:outline-hidden focus:placeholder:text-black active:outline-hidden disabled:text-muted"
           value={newTodo}
           onChange={handleChange}
           onFocus={() => setFocused(true)}
