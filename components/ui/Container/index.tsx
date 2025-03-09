@@ -8,7 +8,7 @@ interface ContainerProps {
 }
 
 const Container: FC<ContainerProps> = ({ children, className }) => {
-  return <div className={cn('mx-auto max-w-screen-xl', className)}>{children}</div>;
+  return <div className={cn('mx-auto max-w-(--breakpoint-xl)', className)}>{children}</div>;
 };
 
 export default Container;

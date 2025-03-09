@@ -40,6 +40,8 @@ const NavItem: FC<NavItemProps> = ({ slug, title, count, marker = 'default' }) =
       )}
     >
       <Link
+
+
         href={`/category/${slug}`}
         key={slug}
         className={cn('flex items-center gap-3 px-6 py-3')}
