@@ -8,8 +8,6 @@ import Hint from '@/components/ui/Hint';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import TimePicker from '@/components/ui/TimePicker';
 import { cn } from '@/libs/utils';
-import type Time from '@/types/Time';
-// import { parseDateTime } from '@/libs/utils';
 
 interface ActionsProps {
   onAddTodo: () => void;
@@ -22,7 +20,7 @@ const currentDate = new Date();
 const Actions: FC<ActionsProps> = ({ onAddTodo, disabled = true }) => {
   const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
   const [calendarOpen, setCalendarOpen] = useState<boolean>(false);
-  const [time, setTime] = useState<Time>(undefined);
+  const [time, setTime] = useState<Date | undefined>(new Date(Date.now()));
 
   const onSelectDate = (date: Date) => {
     setSelectedDate(date);

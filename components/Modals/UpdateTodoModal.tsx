@@ -30,7 +30,7 @@ const UpdateTodoModal = () => {
   const [status, setStatus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>();
   const [selectedCategory, setSelectedCategory] = useState<string>('');
-  const [deadline, setDeadline] = useState<Date | undefined>(undefined);
+  const [deadline, setDeadline] = useState<Date | undefined>(new Date(Date.now()));
 
   const handleChangeTitle = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value);

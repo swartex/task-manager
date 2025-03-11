@@ -16,7 +16,7 @@ const AddNewTodo: FC = () => {
   const [newTodo, setNewTodo] = useState<string>('');
   const [focused, setFocused] = useState<boolean>(false);
   const [disabled, setDisabled] = useState<boolean>(false);
-  const [deadline, setDeadline] = useState<number>(0);
+  const [deadline, setDeadline] = useState<Date>(new Date(Date.now()));
   const params = useParams();
 
   const { execute } = useAction(createTodo, {
