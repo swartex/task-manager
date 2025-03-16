@@ -7,7 +7,6 @@ import { toast } from 'sonner';
 
 import { createTodo } from '@/actions/createTodo';
 import { getCategories } from '@/actions/getCategory';
-import DatePicker from '@/components/ui/DatePicker';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import {
   Select,
@@ -22,8 +21,9 @@ import { Switch } from '@/components/ui/switch';
 import { useAction } from '@/hooks/useAction';
 import { useModal } from '@/hooks/useModal';
 
-import { Button } from '../ui/button';
-import Input from '../ui/input';
+import { Button } from '@/components/ui/button';
+import Input from '@/components/ui/input';
+import { Textarea } from '@/components/ui/textarea';
 
 const CreateTodoModal = () => {
   const { isOpen, onClose, type } = useModal();
@@ -32,7 +32,6 @@ const CreateTodoModal = () => {
   const [status, setStatus] = useState<boolean>(false);
   const [categories, setCategories] = useState<Category[]>();
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  const [deadline, setDeadline] = useState<Date | undefined>(undefined);
 
   const { execute } = useAction(createTodo, {
     onSuccess: (data) => {
@@ -46,7 +45,7 @@ const CreateTodoModal = () => {
     setTitle(e.target.value);
   };
 
-  const handleChangeDescription = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeDescription = (e: ChangeEvent<HTMLTextAreaElement>) => {
     setdescription(e.target.value);
   };
 
@@ -55,18 +54,10 @@ const CreateTodoModal = () => {
     setStatus(false);
     setSelectedCategory('');
     setdescription('');
-    setDeadline(undefined);
     onClose();
   }
 
   const handelAddCategory = () => {
-    // await axios.post('/api/v1/todo', {
-    //   title,
-    //   description,
-    //   status,
-    //   deadline,
-    //   categoryId: selectedCategory,
-    // });
 
     //FIXME: need refactor setSelectedCategory
     if (selectedCategory) {
@@ -74,7 +65,6 @@ const CreateTodoModal = () => {
         title,
         description,
         status,
-        deadline,
         category_id: selectedCategory,
       });
     }
@@ -105,11 +95,11 @@ const CreateTodoModal = () => {
               type="text"
               placeholder="Todo name"
             />
-            <Input
+            <Textarea
+              placeholder="Todo description"
               value={description}
               onChange={handleChangeDescription}
-              type="text"
-              placeholder="Todo description"
+              className="resize-none"
             />
             <div className="py-4">
               <Select onValueChange={(value) => setSelectedCategory(value)}>
@@ -132,7 +122,6 @@ const CreateTodoModal = () => {
               </Select>
             </div>
             <div className="flex items-center justify-between gap-4 py-4">
-              <DatePicker onDateChange={setDeadline} />
               <div className="flex items-center space-x-2 py-4">
                 <Switch id="status" onCheckedChange={handleChangeStatus} />
                 <label

@@ -13,11 +13,7 @@ const ToasterProvider = () => {
   if (!isMounted) {
     return null;
   }
-  return (
-    <>
-      <Toaster closeButton richColors position="bottom-right" />
-    </>
-  );
+  return <Toaster closeButton richColors position="bottom-right" />;
 };
 
 export default ToasterProvider;
